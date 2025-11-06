@@ -1,0 +1,5 @@
+*.test
+.direnv/
+.envrc
+.vscode/*
+!.vscode/extensions.json
