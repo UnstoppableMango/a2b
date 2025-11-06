@@ -27,6 +27,13 @@
           src = ./.;
           vendorHash = null;
         });
+
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            gnumake
+            go
+          ];
+        };
       }
     );
 }
