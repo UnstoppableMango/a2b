@@ -16,6 +16,7 @@
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        lib = nixpkgs.lib;
       in
       {
         formatter = pkgs.nixfmt-tree;
@@ -24,7 +25,7 @@
           pname = "a2b";
           version = "0.0.1";
 
-          src = ./.;
+          src = lib.cleanSource ./.;
           vendorHash = null;
           vendorSha256 = null;
         });
