@@ -24,15 +24,17 @@
         packages.default = pkgs.buildGoModule (finalAttrs: {
           pname = "a2b";
           version = "0.0.1";
-
           src = lib.cleanSource ./.;
           vendorHash = null;
-          vendorSha256 = null;
+          deleteVendor = true;
         });
 
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
+            git
+            gh
             gnumake
+            dprint
             go
           ];
         };
