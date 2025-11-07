@@ -26,8 +26,6 @@
           version = "0.0.1";
           src = lib.cleanSource ./.;
           vendorHash = null;
-
-          # I think this is because of the go tools
           proxyVendor = true;
 
           meta = with lib; {
