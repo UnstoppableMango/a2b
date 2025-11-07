@@ -3,4 +3,5 @@
 .envrc
 .vscode/*
 !.vscode/extensions.json
+.idea/
 result

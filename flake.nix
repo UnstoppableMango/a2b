@@ -26,7 +26,16 @@
           version = "0.0.1";
           src = lib.cleanSource ./.;
           vendorHash = null;
-          deleteVendor = true;
+
+          # I think this is because of the go tools
+          proxyVendor = true;
+
+          meta = with lib; {
+            description = "A collection of ux plugins";
+            license = licenses.mit;
+            maintainers = with maintainers; [ UnstoppableMango ];
+            platforms = platforms.all;
+          };
         });
 
         devShells.default = pkgs.mkShell {
