@@ -13,3 +13,6 @@ format fmt:
 
 tidy:
 	$(GO) mod tidy
+
+.vscode/settings.json: hack/vscode.json
+	cp $< $@

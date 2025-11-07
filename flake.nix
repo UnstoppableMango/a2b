@@ -21,11 +21,12 @@
         formatter = pkgs.nixfmt-tree;
 
         packages.default = pkgs.buildGoModule (finalAttrs: {
-          pname = "ux-plugins";
-          version = "0.1.0";
+          pname = "a2b";
+          version = "0.0.1";
 
           src = ./.;
           vendorHash = null;
+          vendorSha256 = null;
         });
 
         devShells.default = pkgs.mkShell {
