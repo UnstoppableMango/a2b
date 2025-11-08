@@ -43,6 +43,7 @@
             gnumake
             dprint
             go
+            nodejs
           ];
         };
       }

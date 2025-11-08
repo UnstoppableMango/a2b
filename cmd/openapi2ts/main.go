@@ -1,15 +1,10 @@
 package main
 
 import (
-	"fmt"
-
-	"github.com/unstoppablemango/ux/pkg/plugin/decl"
+	a2b "github.com/unstoppablemango/a2b/pkg"
+	"github.com/unstoppablemango/ux/pkg/plugin/cli"
 )
 
 func main() {
-	plugin := decl.Cli{
-		Name: "",
-	}
-
-	fmt.Println("Hello world")
+	cli.PluginMain(a2b.OpenApiTypeScript)
 }
