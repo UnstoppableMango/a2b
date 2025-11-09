@@ -28,6 +28,6 @@ pkgs.mkShell {
     ginkgo
     goEnv
     gomod2nix
-    # ux
+    ux
   ];
 }

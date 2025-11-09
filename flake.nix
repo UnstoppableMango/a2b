@@ -50,6 +50,8 @@
           };
         };
 
+        apps.ux = ux.apps.${system}.ux;
+
         packages.default = pkgs.callPackage ./. {
           inherit (gomod2nix.legacyPackages.${system}) buildGoApplication;
         };
