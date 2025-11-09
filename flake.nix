@@ -31,25 +31,20 @@
         pkgs = nixpkgs.legacyPackages.${system};
       in
       {
-        formatter = pkgs.nixfmt-tree;
-
-        packages.default = pkgs.buildGoModule (finalAttrs: {
-          pname = "a2b";
-          version = "0.0.1";
-          src = pkgs.lib.cleanSource ./.;
-          vendorHash = null;
-          proxyVendor = true;
-
-          meta = with pkgs.lib; {
-            description = "A collection of ux plugins";
-            license = licenses.mit;
-            maintainers = with maintainers; [ UnstoppableMango ];
-            platforms = platforms.all;
+        formatter = treefmt-nix.lib.mkWrapper pkgs {
+          projectRootFile = "flake.nix";
+          programs = {
+            gofmt.enable = true;
+            nixfmt.enable = true;
           };
-        });
+        };
+
+        packages.default = pkgs.callPackage ./. {
+          inherit (gomod2nix.legacyPackages.${system}) buildGoApplication;
+        };
 
         devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
+          packages = with pkgs; [
             git
             gh
             gnumake
