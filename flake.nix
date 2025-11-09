@@ -15,6 +15,15 @@
         flake-utils.follows = "flake-utils";
       };
     };
+    ux = {
+      url = "github:unstoppablemango/ux";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+        gomod2nix.follows = "gomod2nix";
+        treefmt-nix.follows = "treefmt-nix";
+      };
+    };
   };
 
   outputs =
@@ -24,6 +33,7 @@
       flake-utils,
       treefmt-nix,
       gomod2nix,
+      ux,
     }:
     flake-utils.lib.eachDefaultSystem (
       system:
