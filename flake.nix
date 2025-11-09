@@ -39,6 +39,9 @@
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        a2b = pkgs.callPackage ./. {
+          inherit (gomod2nix.legacyPackages.${system}) buildGoApplication;
+        };
       in
       {
         formatter = treefmt-nix.lib.mkWrapper pkgs {
@@ -51,10 +54,13 @@
         };
 
         apps.ux = ux.apps.${system}.ux;
-
-        packages.default = pkgs.callPackage ./. {
-          inherit (gomod2nix.legacyPackages.${system}) buildGoApplication;
+        apps.openapi2ts = {
+          type = "app";
+          program = a2b + "/bin/openapi2ts";
         };
+
+        packages.a2b = a2b;
+        packages.default = a2b;
 
         devShells.default = pkgs.callPackage ./shell.nix {
           inherit (gomod2nix.legacyPackages.${system}) mkGoEnv gomod2nix;

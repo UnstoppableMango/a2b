@@ -10,13 +10,14 @@
       ];
     }
   ),
+  lib,
   buildGoApplication ? pkgs.buildGoApplication,
 }:
 
 buildGoApplication {
   pname = "a2b";
   version = "0.0.1";
-  src = pkgs.lib.cleanSource ./.;
+  src = lib.cleanSource ./.;
   modules = ./gomod2nix.toml;
 
   checkPhase = ''
