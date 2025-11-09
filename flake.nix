@@ -36,6 +36,7 @@
           programs = {
             gofmt.enable = true;
             nixfmt.enable = true;
+            dprint.enable = true;
           };
         };
 
@@ -51,6 +52,7 @@
             dprint
             go
             nodejs
+            ginkgo
           ];
         };
       }
