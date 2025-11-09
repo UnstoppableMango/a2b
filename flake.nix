@@ -54,16 +54,9 @@
           inherit (gomod2nix.legacyPackages.${system}) buildGoApplication;
         };
 
-        devShells.default = pkgs.mkShell {
-          packages = with pkgs; [
-            git
-            gh
-            gnumake
-            dprint
-            go
-            nodejs
-            ginkgo
-          ];
+        devShells.default = pkgs.callPackage ./shell.nix {
+          inherit (gomod2nix.legacyPackages.${system}) mkGoEnv gomod2nix;
+          inherit (ux.packages.${system}) ux;
         };
       }
     );
