@@ -16,6 +16,9 @@ tidy:
 bin/openapi2ts:
 	$(GO) build -o $@ ./cmd/${@F}
 
+result:
+	$(NIX) build
+
 gomod2nix.toml: go.mod
 	$(GO) tool gomod2nix
 
@@ -25,4 +28,4 @@ gomod2nix.toml: go.mod
 .vscode/settings.json: hack/vscode.json
 	cp $< $@
 
-.PHONY: bin/openapi2ts
+.PHONY: bin/openapi2ts result
