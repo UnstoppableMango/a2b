@@ -2,11 +2,15 @@ module github.com/unstoppablemango/a2b
 
 go 1.25.2
 
-tool github.com/onsi/ginkgo/v2/ginkgo
+tool (
+	github.com/nix-community/gomod2nix
+	github.com/onsi/ginkgo/v2/ginkgo
+)
 
 require github.com/unstoppablemango/ux v0.0.12
 
 require (
+	github.com/BurntSushi/toml v1.5.0 // indirect
 	github.com/Masterminds/semver/v3 v3.4.0 // indirect
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
 	github.com/charmbracelet/colorprofile v0.3.2 // indirect
@@ -23,8 +27,11 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/muesli/termenv v0.16.0 // indirect
+	github.com/nix-community/go-nix v0.0.0-20220612195009-5f5614f7ca47 // indirect
+	github.com/nix-community/gomod2nix v1.7.0 // indirect
 	github.com/onsi/ginkgo/v2 v2.27.2 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
+	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/spf13/cobra v1.10.1 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/unmango/go v0.9.0 // indirect
@@ -34,4 +41,5 @@ require (
 	golang.org/x/sync v0.18.0 // indirect
 	golang.org/x/sys v0.38.0 // indirect
 	golang.org/x/tools v0.38.0 // indirect
+	golang.org/x/tools/go/vcs v0.1.0-deprecated // indirect
 )

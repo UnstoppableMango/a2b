@@ -16,6 +16,9 @@ tidy:
 bin/openapi2ts:
 	$(GO) build -o $@ ./cmd/${@F}
 
+gomod2nix.toml: go.mod
+	$(GO) tool gomod2nix
+
 .make/nix-build:
 	$(NIX) build
 
