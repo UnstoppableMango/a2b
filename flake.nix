@@ -28,7 +28,7 @@
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-        pkgs = nixpkgs.legacyPackages.${system} // gomod2nix.legacyPackages.${system};
+        pkgs = nixpkgs.legacyPackages.${system};
       in
       {
         formatter = treefmt-nix.lib.mkWrapper pkgs {
@@ -41,7 +41,7 @@
         };
 
         packages.default = pkgs.callPackage ./. {
-          inherit (pkgs) buildGoApplication;
+          inherit (gomod2nix.legacyPackages.${system}) buildGoApplication;
         };
 
         devShells.default = pkgs.mkShell {
@@ -53,7 +53,6 @@
             go
             nodejs
             ginkgo
-            gomod2nix
           ];
         };
       }
