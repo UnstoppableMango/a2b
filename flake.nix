@@ -57,6 +57,17 @@
         apps.openapi2ts = {
           type = "app";
           program = a2b + "/bin/openapi2ts";
+          meta = {
+            description = "Convert OpenAPI specs to TypeScript types";
+            homepage = "https://github.com/UnstoppableMango/a2b";
+            license = [ pkgs.lib.licenses.mit ];
+            maintainers = [
+              {
+                name = "Erik Rasmussen";
+                email = "erik.rasmussen@unmango.dev";
+              }
+            ];
+          };
         };
 
         packages.a2b = a2b;
