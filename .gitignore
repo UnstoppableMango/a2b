@@ -1,0 +1,9 @@
+*.test
+.direnv/
+.envrc
+.vscode/*
+!.vscode/extensions.json
+.idea/
+result
+go.work*
+bin/
