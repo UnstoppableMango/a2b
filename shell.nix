@@ -22,6 +22,7 @@ pkgs.mkShell {
     git
     gh
     gnumake
+    docker
     dprint
     go
     nodejs

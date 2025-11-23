@@ -1,3 +1,6 @@
+IMAGE ?= ghcr.io/unstoppablemango/a2b:dev
+
+DOCKER ?= docker
 GO     ?= go
 GINKGO ?= $(GO) tool ginkgo
 NIX    ?= nix
@@ -6,6 +9,9 @@ build: bin/openapi2ts
 
 test:
 	$(GINKGO) -r .
+
+docker:
+	$(DOCKER) build -t ${IMAGE} .
 
 format fmt:
 	$(NIX) fmt
