@@ -12,6 +12,7 @@
   ),
   lib,
   buildGoApplication ? pkgs.buildGoApplication,
+  ux,
 }:
 
 buildGoApplication {

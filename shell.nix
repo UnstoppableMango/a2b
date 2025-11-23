@@ -25,6 +25,7 @@ pkgs.mkShell {
     docker
     dprint
     go
+    nixd
     nodejs
     ginkgo
     goEnv

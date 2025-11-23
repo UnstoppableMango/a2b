@@ -17,6 +17,7 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         gomod2nix.follows = "gomod2nix";
+        flake-parts.follows = "flake-parts";
       };
     };
   };
