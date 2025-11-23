@@ -6,6 +6,7 @@ GINKGO ?= $(GO) tool ginkgo
 NIX    ?= nix
 
 build: bin/openapi2ts
+deps: gomod2nix.toml
 
 test:
 	$(GINKGO) -r .
