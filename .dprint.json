@@ -15,7 +15,8 @@
   },
   "excludes": [
     "**/node_modules",
-    "**/*-lock.json"
+    "**/*-lock.json",
+    "gomod2nix.toml"
   ],
   "plugins": [
     "https://plugins.dprint.dev/typescript-0.95.12.wasm",
