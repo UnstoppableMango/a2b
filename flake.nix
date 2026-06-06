@@ -3,65 +3,91 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    systems.url = "github:nix-systems/default";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    treefmt-nix = {
-      url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
     gomod2nix = {
       url = "github:nix-community/gomod2nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     ux = {
       url = "github:unstoppablemango/ux";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         gomod2nix.follows = "gomod2nix";
+        flake-parts.follows = "flake-parts";
       };
+    };
+
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs =
     inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
-      ];
+      systems = import inputs.systems;
       imports = [ inputs.treefmt-nix.flakeModule ];
+
       perSystem =
-        { pkgs, system, ... }:
+        {
+          inputs',
+          pkgs,
+          lib,
+          system,
+          ...
+        }:
         let
-          a2b = pkgs.callPackage ./. {
-            inherit (inputs.gomod2nix.legacyPackages.${system}) buildGoApplication;
+          inherit (inputs'.gomod2nix.legacyPackages) gomod2nix buildGoApplication;
+          inherit (inputs'.ux.packages) ux;
+
+          a2b = pkgs.callPackage ./nix { inherit buildGoApplication ux; };
+
+          me = {
+            name = "Erik Rasmussen";
+            email = "erik.rasmussen@unmango.dev";
           };
         in
         {
-          apps.ux = inputs.ux.apps.${system}.ux;
+          apps.ux = {
+            type = "app";
+            program = "${ux}/bin/ux";
+          };
+
           apps.openapi2ts = {
             type = "app";
-            program = a2b + "/bin/openapi2ts";
-            meta = {
+            program = "${a2b}/bin/openapi2ts";
+            meta = with lib; {
               description = "Convert OpenAPI specs to TypeScript types";
               homepage = "https://github.com/UnstoppableMango/a2b";
-              license = [ pkgs.lib.licenses.mit ];
-              maintainers = [
-                {
-                  name = "Erik Rasmussen";
-                  email = "erik.rasmussen@unmango.dev";
-                }
-              ];
+              license = [ licenses.mit ];
+              maintainers = [ me ];
+              mainProgram = "openapi2ts";
             };
           };
 
-          packages.a2b = a2b;
-          packages.default = a2b;
+          packages = {
+            inherit a2b;
+            default = a2b;
+          };
 
-          devShells.default = pkgs.callPackage ./shell.nix {
-            inherit (inputs.gomod2nix.legacyPackages.${system}) mkGoEnv gomod2nix;
-            inherit (inputs.ux.packages.${system}) ux;
+          devShells.default = pkgs.mkShell {
+            packages = with pkgs; [
+              git
+              gh
+              gnumake
+              docker
+              dprint
+              go
+              nixd
+              nodejs
+              ginkgo
+              gomod2nix
+              ux
+            ];
           };
 
           treefmt = {

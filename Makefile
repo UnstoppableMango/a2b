@@ -17,7 +17,9 @@ docker:
 format fmt:
 	$(NIX) fmt
 
-tidy:
+tidy: go.sum nix/gomod2nix.toml
+
+go.sum:
 	$(GO) mod tidy
 
 bin/openapi2ts:
@@ -26,8 +28,8 @@ bin/openapi2ts:
 result:
 	$(NIX) build
 
-gomod2nix.toml: go.mod
-	$(GO) tool gomod2nix
+nix/gomod2nix.toml: go.mod
+	$(GO) tool gomod2nix --outdir ./nix
 
 .make/nix-build:
 	$(NIX) build

@@ -1,6 +1,6 @@
 module github.com/unstoppablemango/a2b
 
-go 1.25.2
+go 1.26.3
 
 tool (
 	github.com/nix-community/gomod2nix
