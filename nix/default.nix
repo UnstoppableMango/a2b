@@ -4,7 +4,6 @@
   lib,
   nodejs,
   petstore,
-  ux,
 }:
 buildGoApplication {
   pname = "a2b";

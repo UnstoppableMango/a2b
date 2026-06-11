@@ -86,6 +86,8 @@
             default = a2b;
           };
 
+          legacyPackages.lib = pkgs.callPackage ./nix/lib { };
+
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
               git
