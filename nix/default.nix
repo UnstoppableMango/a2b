@@ -20,8 +20,8 @@ buildGoApplication {
   PETSTORE_PATH = petstore;
 
   # TODO: Need to pre-install openapi-typescript.
-  #       Probably use node2nix to tired to figure it out right now.
-  #       Its only one test, so not a huge deal
+  #       Probably use node2nix; too tired to figure it out right now.
+  #       It's only one test, so not a huge deal.
   doCheck = false;
 
   checkPhase = ''
