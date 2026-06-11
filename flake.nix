@@ -44,7 +44,8 @@
           inherit (inputs'.gomod2nix.legacyPackages) gomod2nix buildGoApplication;
           inherit (inputs'.ux.packages) ux;
 
-          a2b = pkgs.callPackage ./nix { inherit buildGoApplication ux; };
+          petstore = pkgs.callPackage ./nix/petstore.nix { };
+          a2b = pkgs.callPackage ./nix { inherit buildGoApplication petstore ux; };
 
           me = {
             name = "Erik Rasmussen";
@@ -55,6 +56,7 @@
           apps.ux = {
             type = "app";
             program = "${ux}/bin/ux";
+            meta.description = "UX CLI";
           };
 
           apps.openapi2ts = {
@@ -70,7 +72,7 @@
           };
 
           packages = {
-            inherit a2b;
+            inherit a2b petstore;
             default = a2b;
           };
 
@@ -83,6 +85,7 @@
               dprint
               go
               nixd
+              nixfmt
               nodejs
               ginkgo
               gomod2nix

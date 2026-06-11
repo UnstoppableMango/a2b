@@ -1,7 +1,9 @@
 {
   buildGoApplication,
-  pkgs,
+  ginkgo,
   lib,
+  nodejs,
+  petstore,
   ux,
 }:
 buildGoApplication {
@@ -10,7 +12,14 @@ buildGoApplication {
   src = lib.cleanSource ./..;
   modules = ./gomod2nix.toml;
 
+  nativeCheckInputs = [
+    ginkgo
+    nodejs
+  ];
+
+  PETSTORE_PATH = petstore;
+
   checkPhase = ''
-    go test ./... -ginkgo.label-filter="!E2E"
+    ginkgo run -r .
   '';
 }

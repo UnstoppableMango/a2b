@@ -1,6 +1,7 @@
 package main_test
 
 import (
+	"os"
 	"testing"
 
 	. "github.com/onsi/ginkgo/v2"
@@ -8,7 +9,10 @@ import (
 	"github.com/onsi/gomega/gexec"
 )
 
-var binPath string
+var (
+	binPath      string
+	petstorePath string
+)
 
 func TestOpenapi2ts(t *testing.T) {
 	RegisterFailHandler(Fail)
@@ -19,6 +23,7 @@ var _ = BeforeSuite(func() {
 	var err error
 	binPath, err = gexec.Build("./main.go")
 	Expect(err).NotTo(HaveOccurred())
+	petstorePath = os.Getenv("PETSTORE_PATH")
 })
 
 var _ = AfterSuite(func() {
