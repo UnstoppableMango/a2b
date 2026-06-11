@@ -1,7 +1,9 @@
 {
   buildGoApplication,
-  pkgs,
+  ginkgo,
   lib,
+  nodejs,
+  petstore,
   ux,
 }:
 buildGoApplication {
@@ -10,7 +12,19 @@ buildGoApplication {
   src = lib.cleanSource ./..;
   modules = ./gomod2nix.toml;
 
+  nativeCheckInputs = [
+    ginkgo
+    nodejs
+  ];
+
+  PETSTORE_PATH = petstore;
+
+  # TODO: Need to pre-install openapi-typescript.
+  #       Probably use node2nix; too tired to figure it out right now.
+  #       It's only one test, so not a huge deal.
+  doCheck = false;
+
   checkPhase = ''
-    go test ./... -ginkgo.label-filter="!E2E"
+    ginkgo run -r .
   '';
 }

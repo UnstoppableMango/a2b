@@ -5,10 +5,12 @@ GO     ?= go
 GINKGO ?= $(GO) tool ginkgo
 NIX    ?= nix
 
-build: bin/openapi2ts
-deps: gomod2nix.toml
+export PETSTORE_PATH := $(abspath bin/petstore.json)
 
-test:
+build: bin/openapi2ts
+deps: nix/gomod2nix.toml
+
+test: bin/petstore.json
 	$(GINKGO) -r .
 
 docker:
@@ -24,6 +26,9 @@ go.sum:
 
 bin/openapi2ts:
 	$(GO) build -o $@ ./cmd/${@F}
+
+bin/petstore.json:
+	$(NIX) build .#petstore --out-link $@
 
 result:
 	$(NIX) build
