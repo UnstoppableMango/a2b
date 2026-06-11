@@ -91,6 +91,10 @@
               gomod2nix
               ux
             ];
+
+            DOCKER = lib.getExe pkgs.docker;
+            GO = lib.getExe pkgs.go;
+            GINKGO = lib.getExe pkgs.ginkgo;
           };
 
           treefmt = {
