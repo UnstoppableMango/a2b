@@ -8,7 +8,7 @@ NIX    ?= nix
 export PETSTORE_PATH := $(abspath bin/petstore.json)
 
 build: bin/openapi2ts
-deps: gomod2nix.toml
+deps: nix/gomod2nix.toml
 
 test: bin/petstore.json
 	$(GINKGO) -r .
