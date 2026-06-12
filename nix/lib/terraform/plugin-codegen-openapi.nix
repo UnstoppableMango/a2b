@@ -9,7 +9,7 @@
   terraform-plugin-codegen-openapi,
 }:
 let
-  configFlag = lib.optionalString (config != null) "--config ${config}";
+  configFlag = lib.optionalString (config != null) "--config ${lib.escapeShellArg (toString config)}";
 in
 runCommand name env ''
   runHook preRun
@@ -18,7 +18,7 @@ runCommand name env ''
     ${configFlag} \
     --output "$out" \
     ${lib.escapeShellArgs flags} \
-    ${src}
+    ${lib.escapeShellArg (toString src)}
 
   runHook postRun
 ''
