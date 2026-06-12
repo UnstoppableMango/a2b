@@ -55,7 +55,7 @@
           inherit (inputs'.ux.packages) ux;
 
           petstore = pkgs.callPackage ./nix/petstore.nix { };
-          a2b = pkgs.callPackage ./nix { inherit buildGoApplication petstore ux; };
+          a2b = pkgs.callPackage ./nix { inherit buildGoApplication petstore; };
 
           me = {
             name = "Erik Rasmussen";

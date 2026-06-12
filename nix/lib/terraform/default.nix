@@ -4,10 +4,10 @@
     attrs:
     import ./plugin-codegen-openapi.nix (
       {
-        lib = attrs.lib ? pkgs.lib;
-        runCommand = attrs.runCommand ? pkgs.runCommand;
+        lib = attrs.lib or pkgs.lib;
+        runCommand = attrs.runCommand or pkgs.runCommand;
         terraform-plugin-codegen-openapi =
-          attrs.terraform-plugin-codegen-openapi ? pkgs.terraform-plugin-codegen-openapi;
+          attrs.terraform-plugin-codegen-openapi or pkgs.terraform-plugin-codegen-openapi;
       }
       // attrs
     );
