@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, terraform-plugin-codegen-openapi }:
 {
   buildProviderSpec =
     attrs:
@@ -7,7 +7,7 @@
         lib = attrs.lib or pkgs.lib;
         runCommand = attrs.runCommand or pkgs.runCommand;
         terraform-plugin-codegen-openapi =
-          attrs.terraform-plugin-codegen-openapi or pkgs.terraform-plugin-codegen-openapi;
+          attrs.terraform-plugin-codegen-openapi or terraform-plugin-codegen-openapi;
       }
       // attrs
     );

@@ -30,6 +30,14 @@
       inputs.treefmt-nix.follows = "treefmt-nix";
     };
 
+    mangonix = {
+      url = "github:UnstoppableMango/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.gomod2nix.follows = "gomod2nix";
+    };
+
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -86,7 +94,9 @@
             default = a2b;
           };
 
-          legacyPackages.lib = pkgs.callPackage ./nix/lib { };
+          legacyPackages.lib = pkgs.callPackage ./nix/lib {
+            inherit (inputs'.mangonix.packages) terraform-plugin-codegen-openapi;
+          };
 
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
