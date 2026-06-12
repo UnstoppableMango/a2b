@@ -1,39 +1,5 @@
 {
   "nodes": {
-    "docker2nix": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "gomod2nix": [
-          "gomod2nix"
-        ],
-        "mangonix": "mangonix",
-        "nix2container": "nix2container",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "systems": [
-          "systems"
-        ],
-        "treefmt-nix": [
-          "treefmt-nix"
-        ]
-      },
-      "locked": {
-        "lastModified": 1780548338,
-        "narHash": "sha256-GGla5uwjGMp7Js4QHl6x4CyGE1KMlUM5ydHCeYgr2Q0=",
-        "owner": "UnstoppableMango",
-        "repo": "docker2nix",
-        "rev": "60992944f0bf26ce130f4cbad8e5057bd191095f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "UnstoppableMango",
-        "repo": "docker2nix",
-        "type": "github"
-      }
-    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -96,62 +62,22 @@
     "mangonix": {
       "inputs": {
         "flake-parts": [
-          "docker2nix",
           "flake-parts"
         ],
         "gomod2nix": [
-          "docker2nix",
           "gomod2nix"
         ],
         "nil": "nil",
-        "nix2container": [
-          "docker2nix",
-          "nix2container"
-        ],
+        "nix2container": "nix2container",
         "nixpkgs": [
-          "docker2nix",
           "nixpkgs"
         ],
         "systems": [
-          "docker2nix",
           "systems"
         ],
         "treefmt-nix": [
-          "docker2nix",
           "treefmt-nix"
         ]
-      },
-      "locked": {
-        "lastModified": 1780458005,
-        "narHash": "sha256-BuMN4P8OLp1ZgD/pEFz78ihZmMOwms21ZoMR+Q1KQVs=",
-        "owner": "UnstoppableMango",
-        "repo": "nix",
-        "rev": "07ed4da238f48a0f6f33f2eeb9bf9b321f23e2fb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "UnstoppableMango",
-        "repo": "nix",
-        "type": "github"
-      }
-    },
-    "mangonix_2": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "gomod2nix": [
-          "gomod2nix"
-        ],
-        "nil": "nil_2",
-        "nix2container": "nix2container_2",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "systems": [
-          "systems"
-        ],
-        "treefmt-nix": "treefmt-nix"
       },
       "locked": {
         "lastModified": 1780875148,
@@ -168,28 +94,6 @@
       }
     },
     "nil": {
-      "inputs": {
-        "nixpkgs": [
-          "docker2nix",
-          "mangonix",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1765326831,
-        "narHash": "sha256-18j8X2Nbe0Wg1+7YrWRlYzmjZ5Wq0NCVwJHJlBIw/dc=",
-        "owner": "oxalica",
-        "repo": "nil",
-        "rev": "504599f7e555a249d6754698473124018b80d121",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oxalica",
-        "repo": "nil",
-        "type": "github"
-      }
-    },
-    "nil_2": {
       "inputs": {
         "nixpkgs": [
           "mangonix",
@@ -211,27 +115,6 @@
       }
     },
     "nix2container": {
-      "inputs": {
-        "nixpkgs": [
-          "docker2nix",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1775487831,
-        "narHash": "sha256-2lguQpLPQaxpQCJjXhmEEAfabwsAhkP29Z7fgLzHARA=",
-        "owner": "nlewo",
-        "repo": "nix2container",
-        "rev": "76be9608a7f4d6c985d28b0e7be903ae2547df3e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nlewo",
-        "repo": "nix2container",
-        "type": "github"
-      }
-    },
-    "nix2container_2": {
       "inputs": {
         "nixpkgs": [
           "mangonix",
@@ -285,13 +168,12 @@
     },
     "root": {
       "inputs": {
-        "docker2nix": "docker2nix",
         "flake-parts": "flake-parts",
         "gomod2nix": "gomod2nix",
-        "mangonix": "mangonix_2",
+        "mangonix": "mangonix",
         "nixpkgs": "nixpkgs",
         "systems": "systems",
-        "treefmt-nix": "treefmt-nix_2",
+        "treefmt-nix": "treefmt-nix",
         "ux": "ux"
       }
     },
@@ -311,27 +193,6 @@
       }
     },
     "treefmt-nix": {
-      "inputs": {
-        "nixpkgs": [
-          "mangonix",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1780220602,
-        "narHash": "sha256-eynAfOmbmxJnkp7YewvCEbShNnnYJ9gLLqkzsYtBPeM=",
-        "owner": "numtide",
-        "repo": "treefmt-nix",
-        "rev": "db947814a175b7ca6ded66e21383d938df01c227",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "treefmt-nix_2": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"

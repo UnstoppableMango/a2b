@@ -6,15 +6,6 @@
     systems.url = "github:nix-systems/default";
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    docker2nix = {
-      url = "github:UnstoppableMango/docker2nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.systems.follows = "systems";
-      inputs.flake-parts.follows = "flake-parts";
-      inputs.gomod2nix.follows = "gomod2nix";
-      inputs.treefmt-nix.follows = "treefmt-nix";
-    };
-
     gomod2nix = {
       url = "github:nix-community/gomod2nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,6 +27,7 @@
       inputs.systems.follows = "systems";
       inputs.flake-parts.follows = "flake-parts";
       inputs.gomod2nix.follows = "gomod2nix";
+      inputs.treefmt-nix.follows = "treefmt-nix";
     };
 
     treefmt-nix = {
