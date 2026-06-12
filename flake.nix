@@ -9,15 +9,25 @@
     gomod2nix = {
       url = "github:nix-community/gomod2nix";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.inputs.systems.follows = "systems";
     };
 
     ux = {
       url = "github:unstoppablemango/ux";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        gomod2nix.follows = "gomod2nix";
-        flake-parts.follows = "flake-parts";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
+      inputs.gomod2nix.follows = "gomod2nix";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.treefmt-nix.follows = "treefmt-nix";
+    };
+
+    mangonix = {
+      url = "github:UnstoppableMango/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.gomod2nix.follows = "gomod2nix";
+      inputs.treefmt-nix.follows = "treefmt-nix";
     };
 
     treefmt-nix = {
@@ -45,7 +55,7 @@
           inherit (inputs'.ux.packages) ux;
 
           petstore = pkgs.callPackage ./nix/petstore.nix { };
-          a2b = pkgs.callPackage ./nix { inherit buildGoApplication petstore ux; };
+          a2b = pkgs.callPackage ./nix { inherit buildGoApplication petstore; };
 
           me = {
             name = "Erik Rasmussen";
@@ -74,6 +84,10 @@
           packages = {
             inherit a2b petstore;
             default = a2b;
+          };
+
+          legacyPackages.lib = pkgs.callPackage ./nix/lib {
+            inherit (inputs'.mangonix.packages) terraform-plugin-codegen-openapi;
           };
 
           devShells.default = pkgs.mkShell {
