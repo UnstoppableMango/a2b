@@ -2,11 +2,11 @@
   command ? "all",
   env ? { },
   flags ? [ ],
+  input,
   lib,
   name,
   runCommand,
   terraform-plugin-codegen-framework,
-  input,
 }:
 runCommand name env ''
   runHook preRun
