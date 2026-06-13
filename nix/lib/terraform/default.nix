@@ -16,7 +16,7 @@
 
   genProvider =
     attrs:
-    import ./plugin-codegen-framework (
+    import ./plugin-codegen-framework.nix (
       {
         inherit (pkgs) lib runCommand;
         inherit terraform-plugin-codegen-framework;
