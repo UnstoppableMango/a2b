@@ -7,33 +7,18 @@ let
   strings = pkgs.callPackage ../strings.nix { };
 in
 {
-  genProviderSpec =
-    attrs:
-    import ./gen-provider-spec.nix (
-      {
-        inherit (pkgs) lib runCommand;
-        inherit terraform-plugin-codegen-openapi;
-      }
-      // attrs
-    );
+  genProviderSpec = pkgs.callPackageWith {
+    inherit (pkgs) lib runCommand;
+    inherit terraform-plugin-codegen-openapi;
+  } ./gen-provider-spec.nix;
 
-  genProvider =
-    attrs:
-    import ./gen-provider.nix (
-      {
-        inherit (pkgs) lib runCommand;
-        inherit terraform-plugin-codegen-framework;
-      }
-      // attrs
-    );
+  genProvider = pkgs.callPackageWith {
+    inherit (pkgs) lib runCommand;
+    inherit terraform-plugin-codegen-framework;
+  } ./gen-provider.nix;
 
-  scaffold =
-    attrs:
-    import ./scaffold.nix (
-      {
-        inherit (pkgs) lib runCommand;
-        inherit strings terraform-plugin-codegen-framework;
-      }
-      // attrs
-    );
+  scaffold = pkgs.callPackageWith {
+    inherit (pkgs) lib runCommand;
+    inherit strings terraform-plugin-codegen-framework;
+  } ./scaffold.nix;
 }
