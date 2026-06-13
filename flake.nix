@@ -87,7 +87,10 @@
           };
 
           legacyPackages.lib = pkgs.callPackage ./nix/lib {
-            inherit (inputs'.mangonix.packages) terraform-plugin-codegen-openapi;
+            inherit (inputs'.mangonix.packages)
+              terraform-plugin-codegen-framework
+              terraform-plugin-codegen-openapi
+              ;
           };
 
           devShells.default = pkgs.mkShell {
