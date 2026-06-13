@@ -63,12 +63,6 @@
           };
         in
         {
-          apps.ux = {
-            type = "app";
-            program = "${ux}/bin/ux";
-            meta.description = "UX CLI";
-          };
-
           apps.openapi2ts = {
             type = "app";
             program = "${a2b}/bin/openapi2ts";
@@ -87,7 +81,10 @@
           };
 
           legacyPackages.lib = pkgs.callPackage ./nix/lib {
-            inherit (inputs'.mangonix.packages) terraform-plugin-codegen-openapi;
+            inherit (inputs'.mangonix.packages)
+              terraform-plugin-codegen-framework
+              terraform-plugin-codegen-openapi
+              ;
           };
 
           devShells.default = pkgs.mkShell {
