@@ -21,6 +21,12 @@ format fmt:
 
 tidy: go.sum nix/gomod2nix.toml
 
+update:
+	$(NIX) flake update
+
+check:
+	$(NIX) flake check
+
 go.sum:
 	$(GO) mod tidy
 
