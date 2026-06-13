@@ -11,13 +11,11 @@
 runCommand name env ''
   runHook preRun
 
-  set -x
-
   ${terraform-plugin-codegen-framework}/bin/tfplugingen-framework generate \
     ${command} \
     --input ${lib.escapeShellArg (toString input)} \
     --output "$out" \
-    ${lib.escapeShellArgs flags} \
+    ${lib.escapeShellArgs flags}
 
   runHook postRun
 ''
