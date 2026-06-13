@@ -6,7 +6,7 @@
 {
   genProviderSpec =
     attrs:
-    import ./plugin-codegen-openapi.nix (
+    import ./gen-provider-spec.nix (
       {
         inherit (pkgs) lib runCommand;
         inherit terraform-plugin-codegen-openapi;
@@ -16,7 +16,7 @@
 
   genProvider =
     attrs:
-    import ./plugin-codegen-framework.nix (
+    import ./gen-provider.nix (
       {
         inherit (pkgs) lib runCommand;
         inherit terraform-plugin-codegen-framework;
