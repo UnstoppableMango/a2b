@@ -1,6 +1,6 @@
 {
   pkgs,
-  terrafrom-plugin-codegen-framework,
+  terraform-plugin-codegen-framework,
   terraform-plugin-codegen-openapi,
 }:
 {
@@ -19,7 +19,7 @@
     import ./plugin-codegen-framework (
       {
         inherit (pkgs) lib runCommand;
-        inherit terrafrom-plugin-codegen-framework;
+        inherit terraform-plugin-codegen-framework;
       }
       // attrs
     );
