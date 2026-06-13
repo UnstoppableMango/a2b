@@ -3,6 +3,9 @@
   terraform-plugin-codegen-framework,
   terraform-plugin-codegen-openapi,
 }:
+let
+  strings = pkgs.callPackage ../strings.nix { };
+in
 {
   genProviderSpec =
     attrs:
@@ -20,6 +23,16 @@
       {
         inherit (pkgs) lib runCommand;
         inherit terraform-plugin-codegen-framework;
+      }
+      // attrs
+    );
+
+  scaffold =
+    attrs:
+    import ./scaffold.nix (
+      {
+        inherit (pkgs) lib runCommand;
+        inherit strings terraform-plugin-codegen-framework;
       }
       // attrs
     );

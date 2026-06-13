@@ -8,6 +8,8 @@
   src,
   terraform-plugin-codegen-openapi,
 }:
+
+# https://developer.hashicorp.com/terraform/plugin/code-generation/openapi-generator#usage
 let
   configFlag = lib.optionalString (config != null) "--config ${lib.escapeShellArg (toString config)}";
 in
