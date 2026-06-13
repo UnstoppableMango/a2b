@@ -1,11 +1,25 @@
-{ pkgs, terraform-plugin-codegen-openapi }:
 {
-  buildProviderSpec =
+  pkgs,
+  terrafrom-plugin-codegen-framework,
+  terraform-plugin-codegen-openapi,
+}:
+{
+  genProviderSpec =
     attrs:
     import ./plugin-codegen-openapi.nix (
       {
         inherit (pkgs) lib runCommand;
         inherit terraform-plugin-codegen-openapi;
+      }
+      // attrs
+    );
+
+  genProvider =
+    attrs:
+    import ./plugin-codegen-framework (
+      {
+        inherit (pkgs) lib runCommand;
+        inherit terrafrom-plugin-codegen-framework;
       }
       // attrs
     );
