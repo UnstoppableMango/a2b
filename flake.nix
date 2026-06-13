@@ -63,12 +63,6 @@
           };
         in
         {
-          apps.ux = {
-            type = "app";
-            program = "${ux}/bin/ux";
-            meta.description = "UX CLI";
-          };
-
           apps.openapi2ts = {
             type = "app";
             program = "${a2b}/bin/openapi2ts";

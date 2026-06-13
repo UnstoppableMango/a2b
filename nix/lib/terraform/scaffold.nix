@@ -24,7 +24,7 @@ runCommand name env ''
 
   ${terraform-plugin-codegen-framework}/bin/tfplugingen-framework scaffold \
     ${command} \
-    --name ${lib.escapeShellArg snakeName}
+    --name ${lib.escapeShellArg snakeName} \
     --output-dir "$out" \
     ${packageFlag} \
     ${lib.escapeShellArgs flags}
