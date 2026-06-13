@@ -5,7 +5,7 @@
   lib,
   name,
   runCommand,
-  src,
+  openapi-spec,
   terraform-plugin-codegen-openapi,
 }:
 
@@ -20,7 +20,7 @@ runCommand name env ''
     ${configFlag} \
     --output "$out" \
     ${lib.escapeShellArgs flags} \
-    ${lib.escapeShellArg (toString src)}
+    ${lib.escapeShellArg (toString openapi-spec)}
 
   runHook postRun
 ''
