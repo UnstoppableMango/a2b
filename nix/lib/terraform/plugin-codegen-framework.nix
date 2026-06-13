@@ -13,7 +13,7 @@ runCommand name env ''
 
   ${terraform-plugin-codegen-framework}/bin/tfplugingen-framework generate \
     ${command} \
-    ${lib.escapeShellArg (toString input)}
+    ${lib.escapeShellArg (toString input)} \
     --output "$out" \
     ${lib.escapeShellArgs flags} \
 
