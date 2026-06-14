@@ -8,16 +8,14 @@
   src,
   template ? null,
 }:
-let
-  templateArgs = lib.optionals (template != null) [ "--template" template ];
-in
 runCommand name env ''
   runHook preRun
 
   export HOME="$(mktemp -d)"
   ${buf}/bin/buf generate "${src}" \
     --output "$out" \
-    ${lib.escapeShellArgs (templateArgs ++ flags)}
+    ${if template != null then "--template \"${template}\"" else ""} \
+    ${lib.escapeShellArgs flags}
 
   runHook postRun
 ''
