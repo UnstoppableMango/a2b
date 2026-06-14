@@ -3,6 +3,7 @@
   env ? { },
   flags ? [ ],
   input,
+  lib,
   name,
   runCommand,
 }:
@@ -12,7 +13,7 @@ runCommand name env ''
   export HOME="$(mktemp -d)"
   ${buf}/bin/buf build ${input} \
     --output $out \
-    ${flags}
+    ${lib.escapeShellArgs flags}
 
   runHook postRun
 ''
