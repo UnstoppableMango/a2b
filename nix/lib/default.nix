@@ -16,4 +16,6 @@ in
     inherit terraform-plugin-codegen-openapi;
     inherit strings;
   };
+
+  upjet = pkgs.callPackage ./upjet { };
 }

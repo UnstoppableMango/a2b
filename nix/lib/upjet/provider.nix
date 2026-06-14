@@ -1,7 +1,6 @@
 {
   buildGoApplication,
   buildProviderRepo,
-  lib,
   coreutils,
   curlMinimal,
   git,
