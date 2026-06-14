@@ -1,7 +1,7 @@
 {
   buf,
   env ? { },
-  flags ? [],
+  flags ? [ ],
   input,
   name,
   runCommand,
@@ -11,7 +11,7 @@ runCommand name env ''
 
   export HOME="$(mktemp -d)"
   ${buf}/bin/buf build ${input} \
-    --output ${output} \
+    --output $out \
     ${flags}
 
   runHook postRun

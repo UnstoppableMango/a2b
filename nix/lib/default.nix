@@ -9,6 +9,8 @@ in
 {
   inherit strings;
 
+  buf = pkgs.callPackage ./buf { };
+
   terraform = pkgs.callPackage ./terraform {
     inherit terraform-plugin-codegen-framework;
     inherit terraform-plugin-codegen-openapi;
