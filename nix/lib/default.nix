@@ -10,6 +10,7 @@ in
   inherit strings;
 
   buf = pkgs.callPackage ./buf { };
+  kube-vip = pkgs.callPackage ./kube-vip { };
 
   terraform = pkgs.callPackage ./terraform {
     inherit terraform-plugin-codegen-framework;
