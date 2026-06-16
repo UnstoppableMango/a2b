@@ -10,6 +10,7 @@ in
   inherit strings;
 
   buf = pkgs.callPackage ./buf { };
+  flux = pkgs.callPackage ./flux { };
   kube-vip = pkgs.callPackage ./kube-vip { };
 
   terraform = pkgs.callPackage ./terraform {
