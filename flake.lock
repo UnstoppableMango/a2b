@@ -21,6 +21,7 @@
     "flake-utils": {
       "inputs": {
         "systems": [
+          "mangonix",
           "systems"
         ]
       },
@@ -42,6 +43,7 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": [
+          "mangonix",
           "nixpkgs"
         ]
       },
@@ -64,9 +66,7 @@
         "flake-parts": [
           "flake-parts"
         ],
-        "gomod2nix": [
-          "gomod2nix"
-        ],
+        "gomod2nix": "gomod2nix",
         "nil": "nil",
         "nix2container": "nix2container",
         "nixpkgs": [
@@ -169,12 +169,10 @@
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
-        "gomod2nix": "gomod2nix",
         "mangonix": "mangonix",
         "nixpkgs": "nixpkgs",
         "systems": "systems",
-        "treefmt-nix": "treefmt-nix",
-        "ux": "ux"
+        "treefmt-nix": "treefmt-nix"
       }
     },
     "systems": {
@@ -209,38 +207,6 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "ux": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "gomod2nix": [
-          "gomod2nix"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "systems": [
-          "systems"
-        ],
-        "treefmt-nix": [
-          "treefmt-nix"
-        ]
-      },
-      "locked": {
-        "lastModified": 1780304788,
-        "narHash": "sha256-PZ73GkRxUhbl6whitztVgdI/RsdyEmYXJeJUNdZhHv0=",
-        "owner": "unstoppablemango",
-        "repo": "ux",
-        "rev": "92709ae1ea157b685d949fb48560d8983085988a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "unstoppablemango",
-        "repo": "ux",
         "type": "github"
       }
     }

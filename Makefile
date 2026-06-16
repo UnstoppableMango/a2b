@@ -1,26 +1,8 @@
-IMAGE ?= ghcr.io/unstoppablemango/a2b:dev
-
-DOCKER ?= docker
-GO     ?= go
-GINKGO ?= $(GO) tool ginkgo
-NIX    ?= nix
-NPM    ?= npm
-
-export PETSTORE_PATH := $(abspath bin/petstore.json)
-
-build: bin/openapi2ts
-deps: nix/gomod2nix.toml
-
-test: bin/petstore.json
-	$(GINKGO) -r .
-
-docker:
-	$(DOCKER) build -t ${IMAGE} .
+NIX ?= nix
+NPM ?= npm
 
 format fmt:
 	$(NIX) fmt
-
-tidy: go.sum nix/gomod2nix.toml
 
 update:
 	$(NIX) flake update
@@ -28,28 +10,13 @@ update:
 check:
 	$(NIX) flake check
 
-go.sum:
-	$(GO) mod tidy
-
-bin/openapi2ts:
-	$(GO) build -o $@ ./cmd/${@F}
-
-bin/petstore.json:
-	$(NIX) build .#petstore --out-link $@
-
 result:
 	$(NIX) build
-
-nix/gomod2nix.toml: go.mod
-	$(GO) tool gomod2nix --outdir ./nix
 
 nix/lib/typescript/npm/package-lock.json: nix/lib/typescript/npm/package.json
 	$(NPM) install --prefix nix/lib/typescript/npm --package-lock-only
 
-.make/nix-build:
-	$(NIX) build
-
 .vscode/settings.json: hack/vscode.json
 	cp $< $@
 
-.PHONY: bin/openapi2ts result
+.PHONY: result
