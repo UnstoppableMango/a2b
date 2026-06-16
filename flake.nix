@@ -94,6 +94,7 @@
               gnumake
               docker
               dprint
+              fluxcd
               go
               nixd
               nixfmt
