@@ -4,6 +4,7 @@ DOCKER ?= docker
 GO     ?= go
 GINKGO ?= $(GO) tool ginkgo
 NIX    ?= nix
+NPM    ?= npm
 
 export PETSTORE_PATH := $(abspath bin/petstore.json)
 
@@ -41,6 +42,9 @@ result:
 
 nix/gomod2nix.toml: go.mod
 	$(GO) tool gomod2nix --outdir ./nix
+
+nix/lib/typescript/npm/package-lock.json: nix/lib/typescript/npm/package.json
+	$(NPM) install --prefix nix/lib/typescript/npm --package-lock-only
 
 .make/nix-build:
 	$(NIX) build
