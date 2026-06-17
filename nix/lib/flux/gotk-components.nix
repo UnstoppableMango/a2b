@@ -24,19 +24,40 @@ let
   createKustomization = import ./create-kustomization.nix;
 
   componentsDrv = install {
-    inherit fluxcd lib runCommand components componentsExtra;
+    inherit
+      fluxcd
+      lib
+      runCommand
+      components
+      componentsExtra
+      ;
     namespace = ns;
     name = "${name}-install";
   };
 
   sourceDrv = createSourceGit {
-    inherit fluxcd lib runCommand url branch tag semver interval;
+    inherit
+      fluxcd
+      lib
+      runCommand
+      url
+      branch
+      tag
+      semver
+      interval
+      ;
     namespace = ns;
     name = sn;
   };
 
   kstnDrv = createKustomization {
-    inherit fluxcd lib runCommand path interval;
+    inherit
+      fluxcd
+      lib
+      runCommand
+      path
+      interval
+      ;
     namespace = ns;
     name = sn;
     source = "GitRepository/${sn}";
