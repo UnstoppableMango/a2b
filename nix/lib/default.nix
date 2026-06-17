@@ -19,5 +19,7 @@ in
     inherit strings;
   };
 
+  typescript = pkgs.callPackage ./typescript { };
+
   upjet = pkgs.callPackage ./upjet { };
 }

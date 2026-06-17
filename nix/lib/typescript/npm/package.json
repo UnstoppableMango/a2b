@@ -1,0 +1,11 @@
+{
+  "name": "openapi-typescript-wrapper",
+  "version": "1.0.0",
+  "description": "Nix wrapper to package openapi-typescript CLI",
+  "bin": {
+    "openapi-typescript": "./node_modules/openapi-typescript/bin/cli.js"
+  },
+  "dependencies": {
+    "openapi-typescript": "7.13.0"
+  }
+}
