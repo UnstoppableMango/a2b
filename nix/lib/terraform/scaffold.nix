@@ -22,6 +22,7 @@ in
 runCommand name env ''
   runHook preRun
 
+  mkdir -p "$out"
   ${terraform-plugin-codegen-framework}/bin/tfplugingen-framework scaffold \
     ${command} \
     --name ${lib.escapeShellArg snakeName} \
