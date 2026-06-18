@@ -1,19 +1,23 @@
 {
-  capturesPath ? null,
-  check ? null,
+  byteRange ? null,
+  captures ? null,
   configPath ? null,
-  cssClasses ? null,
+  containingByteRange ? null,
+  containingRowRange ? null,
   env ? { },
   grammarPath ? null,
-  html ? null,
+  langName ? null,
   lib,
+  libPath ? null,
   paths ? [ ],
   pathsFile ? null,
-  queryPaths ? [ ],
+  queryPath,
   quiet ? null,
   rebuild ? null,
+  rowRange ? null,
   runCommand,
   scope ? null,
+  test ? null,
   testNumber ? null,
   time ? null,
   tree-sitter,
@@ -23,43 +27,48 @@ let
   valFlag =
     name: val: lib.optionalString (val != null) "--${name} ${lib.escapeShellArg (toString val)}";
 
-  htmlArg = boolFlag "html" html;
-  cssClassesArg = boolFlag "css-classes" cssClasses;
-  checkArg = boolFlag "check" check;
+  capturesArg = boolFlag "captures" captures;
   quietArg = boolFlag "quiet" quiet;
   rebuildArg = boolFlag "rebuild" rebuild;
+  testArg = boolFlag "test" test;
   timeArg = boolFlag "time" time;
 
-  capturesPathArg = valFlag "captures-path" capturesPath;
+  byteRangeArg = valFlag "byte-range" byteRange;
   configPathArg = valFlag "config-path" configPath;
+  containingByteRangeArg = valFlag "containing-byte-range" containingByteRange;
+  containingRowRangeArg = valFlag "containing-row-range" containingRowRange;
   grammarPathArg = valFlag "grammar-path" grammarPath;
+  langNameArg = valFlag "lang-name" langName;
+  libPathArg = valFlag "lib-path" libPath;
+  rowRangeArg = valFlag "row-range" rowRange;
   scopeArg = valFlag "scope" scope;
   testNumberArg = valFlag "test-number" testNumber;
 
   pathsFileArg = lib.optionalString (pathsFile != null) "--paths ${lib.escapeShellArg pathsFile}";
-  queryPathsArgs = lib.concatMapStringsSep " " (
-    p: "--query-paths ${lib.escapeShellArg p}"
-  ) queryPaths;
 in
-runCommand "tree-sitter-highlight" env ''
+runCommand "tree-sitter-query" env ''
   runHook preRun
 
   export HOME="$(mktemp -d)"
 
-  ${tree-sitter}/bin/tree-sitter highlight \
-    ${htmlArg} \
-    ${cssClassesArg} \
-    ${checkArg} \
-    ${capturesPathArg} \
-    ${queryPathsArgs} \
+  ${tree-sitter}/bin/tree-sitter query \
+    ${capturesArg} \
+    ${byteRangeArg} \
+    ${containingByteRangeArg} \
+    ${rowRangeArg} \
+    ${containingRowRangeArg} \
     ${scopeArg} \
-    ${timeArg} \
-    ${quietArg} \
-    ${pathsFileArg} \
     ${grammarPathArg} \
+    ${libPathArg} \
+    ${langNameArg} \
+    ${pathsFileArg} \
     ${configPathArg} \
     ${testNumberArg} \
+    ${testArg} \
+    ${timeArg} \
+    ${quietArg} \
     ${rebuildArg} \
+    ${lib.escapeShellArg queryPath} \
     ${lib.escapeShellArgs paths} \
     > $out
 

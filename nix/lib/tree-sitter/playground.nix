@@ -6,7 +6,9 @@
   tree-sitter,
 }:
 let
-  grammarPathArg = lib.optionalString (grammarPath != null) "--grammar-path ${lib.escapeShellArg grammarPath}";
+  grammarPathArg = lib.optionalString (
+    grammarPath != null
+  ) "--grammar-path ${lib.escapeShellArg grammarPath}";
 in
 runCommand "tree-sitter-playground" env ''
   runHook preRun

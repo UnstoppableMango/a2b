@@ -9,6 +9,7 @@ let
     init = callPackage ./init.nix { };
     parse = callPackage ./parse.nix { };
     playground = callPackage ./playground.nix { };
+    query = callPackage ./query.nix { };
   };
 in
 packages
