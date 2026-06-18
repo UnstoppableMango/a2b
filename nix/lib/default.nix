@@ -19,7 +19,7 @@ in
     inherit strings;
   };
 
+  tree-sitter = pkgs.callPackage ./tree-sitter { };
   typescript = pkgs.callPackage ./typescript { };
-
   upjet = pkgs.callPackage ./upjet { };
 }
