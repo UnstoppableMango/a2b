@@ -16,6 +16,7 @@ in
 runCommand name env ''
   runHook preRun
 
+  mkdir -p "$out"
   ${terraform-plugin-codegen-openapi}/bin/tfplugingen-openapi generate \
     ${configFlag} \
     --output "$out" \
