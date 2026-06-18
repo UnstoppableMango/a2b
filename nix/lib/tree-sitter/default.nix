@@ -7,6 +7,7 @@ let
     generate = callPackage ./generate.nix { };
     init = callPackage ./init.nix { };
     parse = callPackage ./parse.nix { };
+    playground = callPackage ./playground.nix { };
   };
 in
 packages
