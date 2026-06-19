@@ -4,10 +4,11 @@
   terraform-plugin-codegen-openapi,
 }:
 let
+  cli = pkgs.callPackage ./cli.nix { };
   strings = pkgs.callPackage ./strings.nix { };
 in
 {
-  inherit strings;
+  inherit cli strings;
 
   buf = pkgs.callPackage ./buf { };
   flux = pkgs.callPackage ./flux { };

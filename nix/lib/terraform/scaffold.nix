@@ -1,4 +1,5 @@
 {
+  cli,
   command ? "data-source",
   env ? { },
   flags ? [ ],
@@ -14,10 +15,6 @@
 # https://developer.hashicorp.com/terraform/plugin/code-generation/framework-generator#scaffold-command
 let
   snakeName = strings.toSnakeCase scaffoldName;
-
-  packageFlag = lib.optionalString (
-    package != null
-  ) "--package ${lib.escapeShellArg (toString package)}";
 in
 runCommand name env ''
   runHook preRun
@@ -27,7 +24,7 @@ runCommand name env ''
     ${command} \
     --name ${lib.escapeShellArg snakeName} \
     --output-dir "$out" \
-    ${packageFlag} \
+    ${cli.optionalArg "package" package} \
     ${lib.escapeShellArgs flags}
 
   runHook postRun

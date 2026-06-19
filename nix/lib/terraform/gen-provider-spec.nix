@@ -1,4 +1,5 @@
 {
+  cli,
   config ? null,
   env ? { },
   flags ? [ ],
@@ -10,15 +11,12 @@
 }:
 
 # https://developer.hashicorp.com/terraform/plugin/code-generation/openapi-generator#usage
-let
-  configFlag = lib.optionalString (config != null) "--config ${lib.escapeShellArg (toString config)}";
-in
 runCommand name env ''
   runHook preRun
 
   mkdir -p "$out"
   ${terraform-plugin-codegen-openapi}/bin/tfplugingen-openapi generate \
-    ${configFlag} \
+    ${cli.optionalArg "config" config} \
     --output "$out" \
     ${lib.escapeShellArgs flags} \
     ${lib.escapeShellArg (toString openapi-spec)}

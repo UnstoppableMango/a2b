@@ -1,5 +1,6 @@
 {
   branch ? null,
+  cli,
   env ? { },
   extraArgs ? [ ],
   fluxcd,
@@ -15,11 +16,11 @@
 runCommand "flux-source-git-${name}" env ''
   ${fluxcd}/bin/flux create source git ${lib.escapeShellArg name} \
     --url=${lib.escapeShellArg url} \
-    ${lib.optionalString (branch != null) "--branch=${lib.escapeShellArg branch}"} \
-    ${lib.optionalString (tag != null) "--tag=${lib.escapeShellArg tag}"} \
-    ${lib.optionalString (semver != null) "--tag-semver=${lib.escapeShellArg semver}"} \
-    ${lib.optionalString (interval != null) "--interval=${lib.escapeShellArg interval}"} \
-    ${lib.optionalString (namespace != null) "--namespace=${lib.escapeShellArg namespace}"} \
+    ${cli.optionalArg "branch" branch} \
+    ${cli.optionalArg "tag" tag} \
+    ${cli.optionalArg "tag-semver" semver} \
+    ${cli.optionalArg "interval" interval} \
+    ${cli.optionalArg "namespace" namespace} \
     --export \
     ${lib.escapeShellArgs extraArgs} \
     > $out

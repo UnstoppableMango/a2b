@@ -4,6 +4,7 @@
   terraform-plugin-codegen-openapi,
 }:
 let
+  cli = pkgs.callPackage ../cli.nix { };
   strings = pkgs.callPackage ../strings.nix { };
 in
 {
@@ -12,7 +13,7 @@ in
     import ./gen-provider-spec.nix (
       {
         inherit (pkgs) lib runCommand;
-        inherit terraform-plugin-codegen-openapi;
+        inherit cli terraform-plugin-codegen-openapi;
       }
       // attrs
     );
@@ -32,7 +33,7 @@ in
     import ./scaffold.nix (
       {
         inherit (pkgs) lib runCommand;
-        inherit strings terraform-plugin-codegen-framework;
+        inherit cli strings terraform-plugin-codegen-framework;
       }
       // attrs
     );
