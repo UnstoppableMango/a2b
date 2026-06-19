@@ -23,7 +23,7 @@ in
     inherit lib terraform-plugin-codegen-framework terraform-plugin-codegen-openapi;
   };
 
+  tree-sitter = pkgs.callPackage ./tree-sitter { };
   typescript = pkgs.callPackage ./typescript { };
-
   upjet = pkgs.callPackage ./upjet { };
 }

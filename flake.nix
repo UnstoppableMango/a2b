@@ -51,6 +51,7 @@
               nixd
               nixfmt
               nodejs
+              tree-sitter
             ];
           };
 
