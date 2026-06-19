@@ -1,3 +1,16 @@
+# Generate a buf.gen.yaml template file.
+#
+# Plugins with a `package` attr are resolved to `local:` paths automatically;
+# all other attrs pass through to the YAML as-is.
+#
+# Example:
+#   buf.mkTemplate {
+#     inputs = [{ directory = "."; }];
+#     plugins = [
+#       { package = pkgs.protoc-gen-go; out = "gen/go"; }
+#       { plugin = "buf.build/connectrpc/es"; out = "gen/es"; }
+#     ];
+#   }
 {
   formats,
   lib,
