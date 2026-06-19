@@ -4,20 +4,23 @@
   terraform-plugin-codegen-openapi,
 }:
 let
-  cli = pkgs.callPackage ./cli.nix { };
-  strings = pkgs.callPackage ./strings.nix { };
+  lib = pkgs.lib.extend (
+    final: prev: {
+      strings = import ./strings.nix { lib = prev; };
+      cli = import ./cli.nix { lib = prev; };
+    }
+  );
 in
 {
-  inherit cli strings;
+  inherit lib;
+  inherit (lib) cli strings;
 
   buf = pkgs.callPackage ./buf { };
   flux = pkgs.callPackage ./flux { };
   kube-vip = pkgs.callPackage ./kube-vip { };
 
   terraform = pkgs.callPackage ./terraform {
-    inherit terraform-plugin-codegen-framework;
-    inherit terraform-plugin-codegen-openapi;
-    inherit strings;
+    inherit lib terraform-plugin-codegen-framework terraform-plugin-codegen-openapi;
   };
 
   typescript = pkgs.callPackage ./typescript { };

@@ -1,19 +1,16 @@
 {
   pkgs,
+  lib,
   terraform-plugin-codegen-framework,
   terraform-plugin-codegen-openapi,
 }:
-let
-  cli = pkgs.callPackage ../cli.nix { };
-  strings = pkgs.callPackage ../strings.nix { };
-in
 {
   genProviderSpec =
     attrs:
     import ./gen-provider-spec.nix (
       {
-        inherit (pkgs) lib runCommand;
-        inherit cli terraform-plugin-codegen-openapi;
+        inherit (pkgs) runCommand;
+        inherit lib terraform-plugin-codegen-openapi;
       }
       // attrs
     );
@@ -22,8 +19,8 @@ in
     attrs:
     import ./gen-provider.nix (
       {
-        inherit (pkgs) lib runCommand;
-        inherit terraform-plugin-codegen-framework;
+        inherit (pkgs) runCommand;
+        inherit lib terraform-plugin-codegen-framework;
       }
       // attrs
     );
@@ -32,8 +29,8 @@ in
     attrs:
     import ./scaffold.nix (
       {
-        inherit (pkgs) lib runCommand;
-        inherit cli strings terraform-plugin-codegen-framework;
+        inherit (pkgs) runCommand;
+        inherit lib terraform-plugin-codegen-framework;
       }
       // attrs
     );

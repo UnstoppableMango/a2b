@@ -1,5 +1,4 @@
 {
-  cli,
   command ? "data-source",
   env ? { },
   flags ? [ ],
@@ -8,13 +7,12 @@
   package ? null,
   runCommand,
   scaffoldName ? name,
-  strings,
   terraform-plugin-codegen-framework,
 }:
 
 # https://developer.hashicorp.com/terraform/plugin/code-generation/framework-generator#scaffold-command
 let
-  snakeName = strings.toSnakeCase scaffoldName;
+  snakeName = lib.strings.toSnakeCase scaffoldName;
 in
 runCommand name env ''
   runHook preRun
@@ -24,7 +22,7 @@ runCommand name env ''
     ${command} \
     --name ${lib.escapeShellArg snakeName} \
     --output-dir "$out" \
-    ${cli.optionalArg "package" package} \
+    ${lib.cli.optionalArg "package" package} \
     ${lib.escapeShellArgs flags}
 
   runHook postRun
