@@ -6,6 +6,7 @@ let
     build = callPackage ./build.nix;
     convert = callPackage ./convert.nix;
     generate = callPackage ./generate.nix;
+    mkTemplate = callPackage ./mk-template.nix;
   };
 in
 packages
