@@ -1,4 +1,5 @@
 {
+  cli,
   dependsOn ? [ ],
   env ? { },
   extraArgs ? [ ],
@@ -17,15 +18,11 @@ runCommand "flux-kustomization-${name}" env ''
   ${fluxcd}/bin/flux create kustomization ${lib.escapeShellArg name} \
     --source=${lib.escapeShellArg source} \
     --path=${lib.escapeShellArg path} \
-    ${lib.optionalString (prune != null) "--prune=${lib.boolToString prune}"} \
-    ${lib.optionalString (interval != null) "--interval=${lib.escapeShellArg interval}"} \
-    ${lib.optionalString (namespace != null) "--namespace=${lib.escapeShellArg namespace}"} \
-    ${
-      lib.optionalString (
-        targetNamespace != null
-      ) "--target-namespace=${lib.escapeShellArg targetNamespace}"
-    } \
-    ${lib.concatMapStringsSep " " (d: "--depends-on=${lib.escapeShellArg d}") dependsOn} \
+    ${cli.boolArg "prune" prune} \
+    ${cli.optionalArg "interval" interval} \
+    ${cli.optionalArg "namespace" namespace} \
+    ${cli.optionalArg "target-namespace" targetNamespace} \
+    ${cli.repeatArg "depends-on" dependsOn} \
     --export \
     ${lib.escapeShellArgs extraArgs} \
     > $out

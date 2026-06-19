@@ -1,4 +1,5 @@
 {
+  cli,
   components ? null,
   componentsExtra ? null,
   env ? { },
@@ -12,17 +13,9 @@
 runCommand name env ''
   ${fluxcd}/bin/flux install \
     --export \
-    ${lib.optionalString (namespace != null) "--namespace=${lib.escapeShellArg namespace}"} \
-    ${
-      lib.optionalString (
-        components != null
-      ) "--components=${lib.escapeShellArg (lib.concatStringsSep "," components)}"
-    } \
-    ${
-      lib.optionalString (
-        componentsExtra != null
-      ) "--components-extra=${lib.escapeShellArg (lib.concatStringsSep "," componentsExtra)}"
-    } \
+    ${cli.optionalArg "namespace" namespace} \
+    ${cli.listArg "components" components} \
+    ${cli.listArg "components-extra" componentsExtra} \
     ${lib.escapeShellArgs extraArgs} \
     > $out
 ''

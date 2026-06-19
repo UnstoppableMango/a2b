@@ -1,6 +1,7 @@
 { pkgs }:
 let
-  callPackage = pkgs.lib.callPackageWith (packages // pkgs);
+  cli = pkgs.callPackage ../cli.nix { };
+  callPackage = pkgs.lib.callPackageWith ({ inherit cli; } // packages // pkgs);
 
   packages = {
     install = callPackage ./install.nix;

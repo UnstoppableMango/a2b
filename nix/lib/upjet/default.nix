@@ -1,8 +1,10 @@
-{
-  pkgs,
-}:
+{ pkgs }:
+let
+  callPackage = pkgs.lib.callPackageWith (packages // pkgs);
 
-{
-  genProviderTemplate = pkgs.callPackage ./gen-provider-template.nix;
-  genProvider = pkgs.callPackage ./gen-provider.nix;
-}
+  packages = {
+    genProviderTemplate = callPackage ./gen-provider-template.nix;
+    genProvider = callPackage ./gen-provider.nix;
+  };
+in
+packages
