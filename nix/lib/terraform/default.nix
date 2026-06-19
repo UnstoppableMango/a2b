@@ -4,34 +4,19 @@
   terraform-plugin-codegen-framework,
   terraform-plugin-codegen-openapi,
 }:
-{
-  genProviderSpec =
-    attrs:
-    import ./gen-provider-spec.nix (
-      {
-        inherit (pkgs) runCommand;
-        inherit lib terraform-plugin-codegen-openapi;
-      }
-      // attrs
-    );
+let
+  callPackage = pkgs.lib.callPackageWith (
+    packages
+    // pkgs
+    // {
+      inherit lib terraform-plugin-codegen-framework terraform-plugin-codegen-openapi;
+    }
+  );
 
-  genProvider =
-    attrs:
-    import ./gen-provider.nix (
-      {
-        inherit (pkgs) runCommand;
-        inherit lib terraform-plugin-codegen-framework;
-      }
-      // attrs
-    );
-
-  scaffold =
-    attrs:
-    import ./scaffold.nix (
-      {
-        inherit (pkgs) runCommand;
-        inherit lib terraform-plugin-codegen-framework;
-      }
-      // attrs
-    );
-}
+  packages = {
+    genProviderSpec = callPackage ./gen-provider-spec.nix;
+    genProvider = callPackage ./gen-provider.nix;
+    scaffold = callPackage ./scaffold.nix;
+  };
+in
+packages
