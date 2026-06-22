@@ -6,14 +6,16 @@
 let
   lib = pkgs.lib.extend (
     final: prev: {
-      strings = import ./strings.nix { lib = prev; };
-      cli = import ./cli.nix { lib = prev; };
+      a2b = {
+        strings = import ./strings.nix { lib = prev; };
+        cli = import ./cli.nix { lib = prev; };
+      };
     }
   );
 in
 {
   inherit lib;
-  inherit (lib) cli strings;
+  inherit (lib.a2b) cli strings;
 
   buf = pkgs.callPackage ./buf { };
   flux = pkgs.callPackage ./flux { };

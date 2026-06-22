@@ -12,7 +12,7 @@
 
 # https://developer.hashicorp.com/terraform/plugin/code-generation/framework-generator#scaffold-command
 let
-  snakeName = lib.strings.toSnakeCase scaffoldName;
+  snakeName = lib.a2b.strings.toSnakeCase scaffoldName;
 in
 runCommand name env ''
   runHook preRun
@@ -22,7 +22,7 @@ runCommand name env ''
     ${command} \
     --name ${lib.escapeShellArg snakeName} \
     --output-dir "$out" \
-    ${lib.cli.optionalArg "package" package} \
+    ${lib.a2b.cli.optionalArg "package" package} \
     ${lib.escapeShellArgs flags}
 
   runHook postRun
