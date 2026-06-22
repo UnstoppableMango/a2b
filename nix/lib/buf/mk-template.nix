@@ -27,13 +27,12 @@ let
     if plugin ? package then
       let
         pkg = plugin.package;
-        binName = plugin.bin or (lib.getName pkg);
         rest = removeAttrs plugin [
           "package"
           "bin"
         ];
       in
-      rest // { local = "${pkg}/bin/${binName}"; }
+      rest // { local = if plugin ? bin then "${pkg}/bin/${binName}" else lib.getExe pkg; }
     else
       plugin;
 
