@@ -68,7 +68,6 @@
         ],
         "gomod2nix": "gomod2nix",
         "nil": "nil",
-        "nix2container": "nix2container",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -80,11 +79,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782015404,
-        "narHash": "sha256-BawW2CzxNW+7SUpZo+oQiiWqoQ/jWFM7kRutJrETdFc=",
+        "lastModified": 1782095156,
+        "narHash": "sha256-EzNtpFFqlqhEvRFfHEqaXmmzwJB+eq9JtWp6UmitcQ8=",
         "owner": "UnstoppableMango",
         "repo": "nix",
-        "rev": "86e62ceae963b7c9c43f2b43d64146bc9d9e9199",
+        "rev": "584d10f91efec730fcbb749b8b5b8163e29cb408",
         "type": "github"
       },
       "original": {
@@ -111,27 +110,6 @@
       "original": {
         "owner": "oxalica",
         "repo": "nil",
-        "type": "github"
-      }
-    },
-    "nix2container": {
-      "inputs": {
-        "nixpkgs": [
-          "mangonix",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1775487831,
-        "narHash": "sha256-2lguQpLPQaxpQCJjXhmEEAfabwsAhkP29Z7fgLzHARA=",
-        "owner": "nlewo",
-        "repo": "nix2container",
-        "rev": "76be9608a7f4d6c985d28b0e7be903ae2547df3e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nlewo",
-        "repo": "nix2container",
         "type": "github"
       }
     },
