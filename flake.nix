@@ -46,7 +46,6 @@
               gh
               gnumake
               docker
-              dprint
               fluxcd
               nixd
               nixfmt
@@ -59,7 +58,13 @@
             projectRootFile = "flake.nix";
             programs = {
               nixfmt.enable = true;
-              # dprint.enable = true;
+              prettier = {
+                enable = true;
+                excludes = [
+                  "**/package-lock.json"
+                  ".claude/**"
+                ];
+              };
             };
           };
         };
