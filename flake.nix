@@ -28,6 +28,7 @@
 
       perSystem =
         {
+          config,
           inputs',
           pkgs,
           ...
@@ -39,6 +40,13 @@
               terraform-plugin-codegen-openapi
               ;
           };
+
+          # Forces legacyPackages.lib to evaluate, catching import errors and wrong
+          # function signatures. Does NOT catch missing attrs from external inputs;
+          # those propagate as lazy error thunks until a derivation is actually built.
+          checks.lib = pkgs.writeText "lib-check" (
+            builtins.toJSON (builtins.attrNames config.legacyPackages.lib)
+          );
 
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
