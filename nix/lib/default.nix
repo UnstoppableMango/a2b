@@ -6,16 +6,12 @@
 let
   lib = pkgs.lib.extend (
     final: prev: {
-      a2b = {
-        strings = import ./strings.nix { lib = prev; };
-        cli = import ./cli.nix { lib = prev; };
-      };
+      a2b.strings = import ./strings.nix { lib = prev; };
+      a2b.cli = import ./cli.nix { lib = prev; };
     }
   );
 in
 {
-  inherit (lib.a2b) cli strings;
-
   buf = pkgs.callPackage ./buf { };
   flux = pkgs.callPackage ./flux { };
   kube-vip = pkgs.callPackage ./kube-vip { };
