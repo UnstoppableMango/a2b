@@ -6,8 +6,8 @@
     systems.url = "github:nix-systems/default";
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    mangonix = {
-      url = "github:UnstoppableMango/nix";
+    mangopkgs = {
+      url = "github:unmango/pkgs";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.flake-parts.follows = "flake-parts";
@@ -28,17 +28,25 @@
 
       perSystem =
         {
+          config,
           inputs',
           pkgs,
           ...
         }:
         {
           legacyPackages.lib = pkgs.callPackage ./nix/lib {
-            inherit (inputs'.mangonix.packages)
+            inherit (inputs'.mangopkgs.packages)
               terraform-plugin-codegen-framework
               terraform-plugin-codegen-openapi
               ;
           };
+
+          # Forces legacyPackages.lib to evaluate, catching import errors and wrong
+          # function signatures. Does NOT catch missing attrs from external inputs;
+          # those propagate as lazy error thunks until a derivation is actually built.
+          checks.lib = pkgs.writeText "lib-check" (
+            builtins.toJSON (builtins.attrNames config.legacyPackages.lib)
+          );
 
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
