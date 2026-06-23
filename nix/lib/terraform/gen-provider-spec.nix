@@ -13,7 +13,6 @@
 runCommand name env ''
   runHook preRun
 
-  mkdir -p "$out"
   ${terraform-plugin-codegen-openapi}/bin/tfplugingen-openapi generate \
     ${lib.a2b.cli.optionalArg "config" config} \
     --output "$out" \
