@@ -6,8 +6,8 @@
     systems.url = "github:nix-systems/default";
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    mangonix = {
-      url = "github:UnstoppableMango/nix";
+    mangopkgs = {
+      url = "github:unmango/pkgs";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.flake-parts.follows = "flake-parts";
@@ -35,7 +35,7 @@
         }:
         {
           legacyPackages.lib = pkgs.callPackage ./nix/lib {
-            inherit (inputs'.mangonix.packages)
+            inherit (inputs'.mangopkgs.packages)
               terraform-plugin-codegen-framework
               terraform-plugin-codegen-openapi
               ;
