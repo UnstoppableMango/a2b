@@ -14,7 +14,6 @@ let
   );
 in
 {
-  inherit lib;
   inherit (lib.a2b) cli strings;
 
   buf = pkgs.callPackage ./buf { };
