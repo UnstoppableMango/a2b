@@ -1,9 +1,12 @@
 {
+  createSourceGit,
+  createKustomization,
   branch ? null,
   components ? null,
   componentsExtra ? null,
   env ? { },
   fluxcd,
+  install,
   interval ? null,
   lib,
   name ? "flux-gotk-components",
@@ -18,10 +21,6 @@
 let
   ns = if namespace != null then namespace else "flux-system";
   sn = if syncName != null then syncName else ns;
-
-  install = import ./install.nix;
-  createSourceGit = import ./create-source-git.nix;
-  createKustomization = import ./create-kustomization.nix;
 
   componentsDrv = install {
     inherit
