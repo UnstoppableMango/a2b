@@ -6,6 +6,7 @@ let
   packages = {
     build = callPackage ./build.nix;
     check = callPackage ./check.nix;
+    runCommand = callPackage ./run-command.nix;
   };
 in
 packages
