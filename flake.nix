@@ -36,6 +36,7 @@
         {
           legacyPackages.lib = pkgs.callPackage ./nix/lib {
             inherit (inputs'.mangopkgs.packages)
+              gossamer
               terraform-plugin-codegen-framework
               terraform-plugin-codegen-openapi
               ;
