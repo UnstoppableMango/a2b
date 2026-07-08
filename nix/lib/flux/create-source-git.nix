@@ -1,14 +1,16 @@
 {
-  branch ? null,
   cli,
+  fluxcd,
+  lib,
+  runCommand,
+}:
+{
+  branch ? null,
   env ? { },
   extraArgs ? [ ],
-  fluxcd,
   interval ? null,
-  lib,
   name,
   namespace ? null,
-  runCommand,
   semver ? null,
   tag ? null,
   url,

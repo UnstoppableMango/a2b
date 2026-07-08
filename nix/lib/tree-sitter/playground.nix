@@ -1,9 +1,11 @@
 {
-  env ? { },
-  grammarPath ? null,
   lib,
   runCommand,
   tree-sitter,
+}:
+{
+  env ? { },
+  grammarPath ? null,
 }:
 let
   grammarPathArg = lib.optionalString (

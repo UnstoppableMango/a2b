@@ -1,12 +1,14 @@
 {
+  lib,
+  runCommand,
+  terraform-plugin-codegen-openapi,
+}:
+{
   config ? null,
   env ? { },
   flags ? [ ],
-  lib,
   name,
-  runCommand,
   openapi-spec,
-  terraform-plugin-codegen-openapi,
 }:
 
 # https://developer.hashicorp.com/terraform/plugin/code-generation/openapi-generator#usage

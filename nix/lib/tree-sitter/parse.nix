@@ -1,4 +1,9 @@
 {
+  lib,
+  runCommand,
+  tree-sitter,
+}:
+{
   configPath ? null,
   cst ? null,
   debug ? null,
@@ -11,20 +16,17 @@
   grammarPath ? null,
   jsonSummary ? null,
   langName ? null,
-  lib,
   libPath ? null,
   noRanges ? null,
   paths ? [ ],
   pathsFile ? null,
   quiet ? null,
   rebuild ? null,
-  runCommand,
   scope ? null,
   stat ? null,
   testNumber ? null,
   time ? null,
   timeout ? null,
-  tree-sitter,
   xml ? null,
 }:
 let

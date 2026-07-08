@@ -11,9 +11,8 @@
 #       { plugin = "buf.build/connectrpc/es"; out = "gen/es"; }
 #     ];
 #   }
+{ formats, lib }:
 {
-  formats,
-  lib,
   name ? "buf.gen.yaml",
   plugins ? [ ],
   inputs ? [ ],
@@ -40,8 +39,6 @@ let
 
   yamlValue =
     removeAttrs attrs [
-      "formats"
-      "lib"
       "name"
       "plugins"
     ]

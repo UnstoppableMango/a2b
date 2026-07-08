@@ -1,14 +1,16 @@
 {
   cli,
+  fluxcd,
+  lib,
+  runCommand,
+}:
+{
   components ? null,
   componentsExtra ? null,
   env ? { },
   extraArgs ? [ ],
-  fluxcd,
-  lib,
   name ? "flux-install",
   namespace ? null,
-  runCommand,
 }:
 runCommand name env ''
   ${fluxcd}/bin/flux install \

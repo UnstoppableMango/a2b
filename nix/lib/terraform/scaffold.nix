@@ -1,13 +1,15 @@
 {
+  lib,
+  runCommand,
+  terraform-plugin-codegen-framework,
+}:
+{
   command ? "data-source",
   env ? { },
   flags ? [ ],
-  lib,
   name,
   package ? null,
-  runCommand,
   scaffoldName ? name,
-  terraform-plugin-codegen-framework,
 }:
 
 # https://developer.hashicorp.com/terraform/plugin/code-generation/framework-generator#scaffold-command

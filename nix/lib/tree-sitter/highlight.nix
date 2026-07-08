@@ -1,4 +1,9 @@
 {
+  lib,
+  runCommand,
+  tree-sitter,
+}:
+{
   capturesPath ? null,
   check ? null,
   configPath ? null,
@@ -6,17 +11,14 @@
   env ? { },
   grammarPath ? null,
   html ? null,
-  lib,
   paths ? [ ],
   pathsFile ? null,
   queryPaths ? [ ],
   quiet ? null,
   rebuild ? null,
-  runCommand,
   scope ? null,
   testNumber ? null,
   time ? null,
-  tree-sitter,
 }:
 let
   boolFlag = name: val: lib.optionalString (val != null) "--${name}";

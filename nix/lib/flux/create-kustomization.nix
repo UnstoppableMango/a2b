@@ -1,16 +1,18 @@
 {
   cli,
+  fluxcd,
+  lib,
+  runCommand,
+}:
+{
   dependsOn ? [ ],
   env ? { },
   extraArgs ? [ ],
-  fluxcd,
   interval ? null,
-  lib,
   name,
   namespace ? null,
   path,
   prune ? null,
-  runCommand,
   source,
   targetNamespace ? null,
 }:

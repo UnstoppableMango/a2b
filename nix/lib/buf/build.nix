@@ -1,11 +1,13 @@
 {
   buf,
+  lib,
+  runCommand,
+}:
+{
   env ? { },
   flags ? [ ],
   input,
-  lib,
   name,
-  runCommand,
 }:
 runCommand name env ''
   runHook preRun

@@ -1,11 +1,13 @@
 {
   buf,
   cli,
+  lib,
+  runCommand,
+}:
+{
   env ? { },
   flags ? [ ],
-  lib,
   name,
-  runCommand,
   src,
   template ? null,
 }:

@@ -1,15 +1,17 @@
 {
   buildGoApplication,
-  buildProviderRepo,
   coreutils,
   curlMinimal,
   git,
   gnumake,
   gotools,
   inetutils,
+  terraform,
+}:
+{
+  buildProviderRepo,
   mangoTools,
   modules,
-  terraform,
   pname,
   version,
   ...

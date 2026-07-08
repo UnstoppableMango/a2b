@@ -1,15 +1,17 @@
 {
   bash,
-  crdRootGroup ? "crossplane.io",
   fetchFromGitHub,
   git,
   lib,
+  stdenvNoCC,
+}:
+{
+  crdRootGroup ? "crossplane.io",
   mangoTools,
   pname ? "upjet-provider-${providerNameLower}",
   providerName,
   providerNameLower ? lib.strings.toLower providerName,
   organizationName,
-  stdenvNoCC,
   terraformProviderSource ? "hashicorp/${providerNameLower}",
   terraformProviderRepo ? "https://github.com/hashicorp/terraform-provider-${providerNameLower}",
   terraformProviderVersion,
