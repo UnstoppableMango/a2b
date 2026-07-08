@@ -1,10 +1,9 @@
+{ buf, runCommand }:
 {
-  buf,
   env ? { },
   from ? "",
   input ? "",
   name,
-  runCommand,
   to,
   type,
 }:

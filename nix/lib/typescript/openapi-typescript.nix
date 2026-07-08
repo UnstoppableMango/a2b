@@ -1,10 +1,12 @@
 {
-  env ? { },
-  flags ? [ ],
   lib,
-  name,
   openapi-typescript,
   runCommand,
+}:
+{
+  env ? { },
+  flags ? [ ],
+  name,
   src,
 }:
 runCommand name env ''

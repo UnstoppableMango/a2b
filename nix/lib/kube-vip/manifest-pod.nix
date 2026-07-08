@@ -1,12 +1,14 @@
 {
+  kube-vip,
+  lib,
+  runCommand,
+}:
+{
   address,
   env ? { },
   extraArgs ? [ ],
   interface,
-  kube-vip,
-  lib,
   name ? "kube-vip-manifest-pod",
-  runCommand,
 }:
 runCommand name env ''
   ${kube-vip}/bin/kube-vip manifest pod \

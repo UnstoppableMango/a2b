@@ -1,18 +1,18 @@
 {
   createSourceGit,
   createKustomization,
+  install,
+  runCommand,
+}:
+{
   branch ? null,
   components ? null,
   componentsExtra ? null,
   env ? { },
-  fluxcd,
-  install,
   interval ? null,
-  lib,
   name ? "flux-gotk-components",
   namespace ? null,
   path,
-  runCommand,
   semver ? null,
   syncName ? null,
   tag ? null,
@@ -24,9 +24,6 @@ let
 
   componentsDrv = install {
     inherit
-      fluxcd
-      lib
-      runCommand
       components
       componentsExtra
       ;
@@ -36,9 +33,6 @@ let
 
   sourceDrv = createSourceGit {
     inherit
-      fluxcd
-      lib
-      runCommand
       url
       branch
       tag
@@ -51,9 +45,6 @@ let
 
   kstnDrv = createKustomization {
     inherit
-      fluxcd
-      lib
-      runCommand
       path
       interval
       ;

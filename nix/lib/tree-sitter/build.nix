@@ -1,11 +1,13 @@
 {
+  lib,
+  runCommand,
+  tree-sitter,
+}:
+{
   debug ? null,
   env ? { },
   grammarPath ? null,
-  lib,
   reuseAllocator ? null,
-  runCommand,
-  tree-sitter,
   wasm ? null,
 }:
 let
