@@ -18,7 +18,7 @@ runCommand name env ''
   cp -r ${src} source
   chmod -R u+w source
   cd source
-  export HOME=$(mktemp -d)
+  export HOME="$(mktemp -d)"
   mkdir -p $out/bin
   ${gossamer}/bin/gos build \
     ${lib.optionalString release "--release"} \

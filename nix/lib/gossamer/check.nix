@@ -14,7 +14,7 @@ runCommand name env ''
   cp -r ${src} source
   chmod -R u+w source
   cd source
-  export HOME=$(mktemp -d)
+  export HOME="$(mktemp -d)"
   ${gossamer}/bin/gos check \
     ${lib.escapeShellArgs flags} \
     ${lib.optionalString (file != null) (lib.escapeShellArg (toString file))}
