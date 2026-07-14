@@ -2,6 +2,9 @@
   lib,
   pulumi,
   pulumiPackages,
+  pulumi-dotnet,
+  pulumi-java,
+  pulumi-yaml,
   runCommand,
 }:
 {
@@ -15,12 +18,15 @@
   version ? null,
 }:
 let
-  # Known nixpkgs pulumi language plugins; languages without one (dotnet, java, yaml, ...)
-  # must be supplied via `plugins`.
+  # Known pulumi language plugins: go/nodejs/python from nixpkgs, dotnet/java/yaml
+  # from mangopkgs (unmango/pkgs). Other/unknown languages must go via `plugins`.
   knownLanguagePlugins = {
     go = pulumiPackages.pulumi-go;
     nodejs = pulumiPackages.pulumi-nodejs;
     python = pulumiPackages.pulumi-python;
+    dotnet = pulumi-dotnet;
+    java = pulumi-java;
+    yaml = pulumi-yaml;
   };
   requestedLanguages = lib.optional (language != null) language ++ languages;
   languagePlugins = map (

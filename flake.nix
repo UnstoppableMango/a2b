@@ -38,6 +38,9 @@
             inherit (inputs'.mangopkgs.packages)
               terraform-plugin-codegen-framework
               terraform-plugin-codegen-openapi
+              pulumi-dotnet
+              pulumi-java
+              pulumi-yaml
               ;
           };
 

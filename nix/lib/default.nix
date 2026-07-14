@@ -2,6 +2,9 @@
   pkgs,
   terraform-plugin-codegen-framework,
   terraform-plugin-codegen-openapi,
+  pulumi-dotnet,
+  pulumi-java,
+  pulumi-yaml,
 }:
 let
   lib = pkgs.lib.extend (
@@ -16,7 +19,14 @@ in
   flux = pkgs.callPackage ./flux { };
   kube-vip = pkgs.callPackage ./kube-vip { };
 
-  pulumi = pkgs.callPackage ./pulumi { inherit lib; };
+  pulumi = pkgs.callPackage ./pulumi {
+    inherit
+      lib
+      pulumi-dotnet
+      pulumi-java
+      pulumi-yaml
+      ;
+  };
 
   terraform = pkgs.callPackage ./terraform {
     inherit lib terraform-plugin-codegen-framework terraform-plugin-codegen-openapi;
