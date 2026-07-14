@@ -26,6 +26,7 @@ make nix/lib/typescript/npm/package-lock.json
 - `nix/lib/` — Nix library functions exposed as `legacyPackages.lib` in the flake. These are **reusable derivation builders** for other projects:
   - `buf` — `build`, `convert`, `generate` derivations for Buf (protobuf toolchain)
   - `kube-vip` — `manifestPod` for kube-vip manifest generation
+  - `pulumi` — `convert`, `genSdk` for Pulumi CLI codegen (schema-based SDK generation, IaC conversion)
   - `terraform` — `genProviderSpec`, `genProvider`, `scaffold` using `terraform-plugin-codegen-*` tools
   - `typescript` — `openapi-typescript` for generating TypeScript types from OpenAPI specs
   - `upjet` — `genProviderTemplate`, `genProvider` for Upjet-based Crossplane providers

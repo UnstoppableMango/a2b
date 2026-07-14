@@ -16,6 +16,8 @@ in
   flux = pkgs.callPackage ./flux { };
   kube-vip = pkgs.callPackage ./kube-vip { };
 
+  pulumi = pkgs.callPackage ./pulumi { inherit lib; };
+
   terraform = pkgs.callPackage ./terraform {
     inherit lib terraform-plugin-codegen-framework terraform-plugin-codegen-openapi;
   };
