@@ -31,8 +31,7 @@
 }:
 let
   boolFlag = name: val: lib.optionalString (val != null) "--${name}";
-  valFlag =
-    name: val: lib.optionalString (val != null) "--${name} ${lib.escapeShellArg (toString val)}";
+  valFlag = name: val: lib.optionalString (val != null) "--${name} ${lib.escapeShellArg "${val}"}";
 
   cstArg = boolFlag "cst" cst;
   debugArg =

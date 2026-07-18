@@ -18,7 +18,7 @@ runCommand name env ''
   mkdir -p "$out"
   ${terraform-plugin-codegen-framework}/bin/tfplugingen-framework generate \
     ${command} \
-    --input ${lib.escapeShellArg (toString input)} \
+    --input ${lib.escapeShellArg "${input}"} \
     --output "$out" \
     ${lib.escapeShellArgs flags}
 
