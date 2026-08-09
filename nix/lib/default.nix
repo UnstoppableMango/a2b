@@ -1,5 +1,6 @@
 {
   pkgs,
+  gossamer,
   terraform-plugin-codegen-framework,
   terraform-plugin-codegen-openapi,
 }:
@@ -14,6 +15,7 @@ in
 {
   buf = pkgs.callPackage ./buf { };
   flux = pkgs.callPackage ./flux { };
+  gossamer = pkgs.callPackage ./gossamer { inherit gossamer; };
   kube-vip = pkgs.callPackage ./kube-vip { };
 
   terraform = pkgs.callPackage ./terraform {
