@@ -13,7 +13,7 @@ runCommand name env ''
   runHook preRun
 
   export HOME="$(mktemp -d)"
-  ${openapi-typescript}/bin/openapi-typescript ${lib.escapeShellArg (toString src)} \
+  ${openapi-typescript}/bin/openapi-typescript ${lib.escapeShellArg "${src}"} \
     --output $out \
     ${lib.escapeShellArgs flags}
 

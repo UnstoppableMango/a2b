@@ -19,7 +19,7 @@ runCommand name env ''
     ${lib.a2b.cli.optionalArg "config" config} \
     --output "$out" \
     ${lib.escapeShellArgs flags} \
-    ${lib.escapeShellArg (toString openapi-spec)}
+    ${lib.escapeShellArg "${openapi-spec}"}
 
   runHook postRun
 ''

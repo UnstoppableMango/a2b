@@ -10,8 +10,7 @@
 }:
 let
   boolFlag = name: val: lib.optionalString (val != null) "--${name}";
-  valFlag =
-    name: val: lib.optionalString (val != null) "--${name} ${lib.escapeShellArg (toString val)}";
+  valFlag = name: val: lib.optionalString (val != null) "--${name} ${lib.escapeShellArg "${val}"}";
 
   updateArg = boolFlag "update" update;
   grammarPathArg = valFlag "grammar-path" grammarPath;

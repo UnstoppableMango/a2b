@@ -22,8 +22,7 @@
 }:
 let
   boolFlag = name: val: lib.optionalString (val != null) "--${name}";
-  valFlag =
-    name: val: lib.optionalString (val != null) "--${name} ${lib.escapeShellArg (toString val)}";
+  valFlag = name: val: lib.optionalString (val != null) "--${name} ${lib.escapeShellArg "${val}"}";
 
   htmlArg = boolFlag "html" html;
   cssClassesArg = boolFlag "css-classes" cssClasses;

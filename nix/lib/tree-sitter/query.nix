@@ -26,8 +26,7 @@
 }:
 let
   boolFlag = name: val: lib.optionalString (val != null) "--${name}";
-  valFlag =
-    name: val: lib.optionalString (val != null) "--${name} ${lib.escapeShellArg (toString val)}";
+  valFlag = name: val: lib.optionalString (val != null) "--${name} ${lib.escapeShellArg "${val}"}";
 
   capturesArg = boolFlag "captures" captures;
   quietArg = boolFlag "quiet" quiet;

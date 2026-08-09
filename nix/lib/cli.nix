@@ -1,8 +1,8 @@
 { lib }:
 {
-  # --flag=value if val != null (toString coerces paths)
+  # --flag=value if val != null
   optionalArg =
-    flag: val: lib.optionalString (val != null) "--${flag}=${lib.escapeShellArg (toString val)}";
+    flag: val: lib.optionalString (val != null) "--${flag}=${lib.escapeShellArg "${val}"}";
 
   # --flag=true|false if val != null
   boolArg = flag: val: lib.optionalString (val != null) "--${flag}=${lib.boolToString val}";
