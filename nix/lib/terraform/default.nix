@@ -14,9 +14,9 @@ let
   );
 
   packages = {
-    genProviderSpec = callPackage ./gen-provider-spec.nix;
-    genProvider = callPackage ./gen-provider.nix;
-    scaffold = callPackage ./scaffold.nix;
+    genProviderSpec = callPackage ./gen-provider-spec.nix { };
+    genProvider = callPackage ./gen-provider.nix { };
+    scaffold = callPackage ./scaffold.nix { };
   };
 in
 packages

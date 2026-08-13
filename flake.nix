@@ -1,6 +1,13 @@
 {
   description = "ux plugins";
 
+  # legacyPackages.lib.terraform/upjet transitively depend on mangopkgs'
+  # gomod2nix-based buildGoApplication, which requires IFD to evaluate.
+  # Building those outputs needs allow-import-from-derivation=true regardless.
+  nixConfig = {
+    allow-import-from-derivation = false;
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     systems.url = "github:nix-systems/triplet";
