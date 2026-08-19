@@ -1,9 +1,9 @@
 {
   description = "ux plugins";
 
-  # legacyPackages.lib.terraform/upjet transitively depend on mangopkgs'
+  # legacyPackages.lib.upjet transitively depends on mangopkgs'
   # gomod2nix-based buildGoApplication, which requires IFD to evaluate.
-  # Building those outputs needs allow-import-from-derivation=true regardless.
+  # Building that output needs allow-import-from-derivation=true regardless.
   nixConfig = {
     allow-import-from-derivation = false;
   };
