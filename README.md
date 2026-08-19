@@ -17,16 +17,16 @@ These builders wrap that tooling as Nix derivations instead, so the generated ou
 
 ## What's in here
 
-| Tool | What it does |
-| --- | --- |
-| `buf` | Build, convert, and generate code from protobuf schemas using [Buf](https://buf.build) |
-| `flux` | Generate [Flux CD](https://fluxcd.io) Kustomizations, GitRepository sources, and install manifests |
-| `gossamer` | Build and check Gossamer projects |
-| `kube-vip` | Generate a [kube-vip](https://kube-vip.io) manifest Pod |
-| `terraform` | Generate Terraform provider code and specs using `terraform-plugin-codegen` |
-| `tree-sitter` | Build, generate, parse, and query [tree-sitter](https://tree-sitter.github.io) grammars |
-| `typescript` | Generate TypeScript types from an OpenAPI spec |
-| `upjet` | Generate [Upjet](https://github.com/crossplane/upjet)-based Crossplane providers |
+| Tool          | What it does                                                                                       |
+| ------------- | -------------------------------------------------------------------------------------------------- |
+| `buf`         | Build, convert, and generate code from protobuf schemas using [Buf](https://buf.build)             |
+| `flux`        | Generate [Flux CD](https://fluxcd.io) Kustomizations, GitRepository sources, and install manifests |
+| `gossamer`    | Build and check Gossamer projects                                                                  |
+| `kube-vip`    | Generate a [kube-vip](https://kube-vip.io) manifest Pod                                            |
+| `terraform`   | Generate Terraform provider code and specs using `terraform-plugin-codegen`                        |
+| `tree-sitter` | Build, generate, parse, and query [tree-sitter](https://tree-sitter.github.io) grammars            |
+| `typescript`  | Generate TypeScript types from an OpenAPI spec                                                     |
+| `upjet`       | Generate [Upjet](https://github.com/crossplane/upjet)-based Crossplane providers                   |
 
 ## Requirements
 
