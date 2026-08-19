@@ -11,7 +11,7 @@ let
   callPackage = pkgs.lib.callPackageWith (packages // pkgs // { inherit openapi-typescript; });
 
   packages = {
-    openapi-typescript = callPackage ./openapi-typescript.nix;
+    openapi-typescript = callPackage ./openapi-typescript.nix { };
   };
 in
 packages

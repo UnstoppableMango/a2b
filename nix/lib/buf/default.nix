@@ -4,10 +4,10 @@ let
   callPackage = pkgs.lib.callPackageWith ({ inherit cli; } // packages // pkgs);
 
   packages = {
-    build = callPackage ./build.nix;
-    convert = callPackage ./convert.nix;
-    generate = callPackage ./generate.nix;
-    mkTemplate = callPackage ./mk-template.nix;
+    build = callPackage ./build.nix { };
+    convert = callPackage ./convert.nix { };
+    generate = callPackage ./generate.nix { };
+    mkTemplate = callPackage ./mk-template.nix { };
   };
 in
 packages
