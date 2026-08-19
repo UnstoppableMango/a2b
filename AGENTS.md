@@ -25,8 +25,15 @@ make nix/lib/typescript/npm/package-lock.json
 
 - `nix/lib/` — Nix library functions exposed as `legacyPackages.lib` in the flake. These are **reusable derivation builders** for other projects:
   - `buf` — `build`, `convert`, `generate` derivations for Buf (protobuf toolchain)
+  - `flux` — `createKustomization`, `createSourceGit`, `gotkComponents`, `install` for Flux CD
+  - `gossamer` — `build`, `check`, `runCommand` derivations
   - `kube-vip` — `manifestPod` for kube-vip manifest generation
   - `terraform` — `genProviderSpec`, `genProvider`, `scaffold` using `terraform-plugin-codegen-*` tools
+  - `tree-sitter` — `build`, `generate`, `highlight`, `init`, `parse`, `playground`, `query` derivations
   - `typescript` — `openapi-typescript` for generating TypeScript types from OpenAPI specs
   - `upjet` — `genProviderTemplate`, `genProvider` for Upjet-based Crossplane providers
   - `strings` — utility: `toSnakeCase`
+
+### Gotchas
+
+- `nixConfig.allow-import-from-derivation = false` in `flake.nix`. Building `legacyPackages.lib.upjet` needs IFD regardless (transitively depends on mangopkgs' gomod2nix-based `buildGoApplication`), so pass `--option allow-import-from-derivation true` when building that output.
