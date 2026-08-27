@@ -17,16 +17,18 @@ These builders wrap that tooling as Nix derivations instead, so the generated ou
 
 ## What's in here
 
-| Tool          | What it does                                                                                            |
-| ------------- | ------------------------------------------------------------------------------------------------------- |
-| `buf`         | Build, convert, generate code from, and vendor external protobuf schemas using [Buf](https://buf.build) |
-| `flux`        | Generate [Flux CD](https://fluxcd.io) Kustomizations, GitRepository sources, and install manifests      |
-| `gossamer`    | Build and check Gossamer projects                                                                       |
-| `kube-vip`    | Generate a [kube-vip](https://kube-vip.io) manifest Pod                                                 |
-| `terraform`   | Generate Terraform provider code and specs using `terraform-plugin-codegen`                             |
-| `tree-sitter` | Build, generate, parse, and query [tree-sitter](https://tree-sitter.github.io) grammars                 |
-| `typescript`  | Generate TypeScript types from an OpenAPI spec                                                          |
-| `upjet`       | Generate [Upjet](https://github.com/crossplane/upjet)-based Crossplane providers                        |
+| Tool             | What it does                                                                                            |
+| ---------------- | ------------------------------------------------------------------------------------------------------- |
+| `buf`            | Build, convert, generate code from, and vendor external protobuf schemas using [Buf](https://buf.build) |
+| `flux`           | Generate [Flux CD](https://fluxcd.io) Kustomizations, GitRepository sources, and install manifests      |
+| `gossamer`       | Build and check Gossamer projects                                                                       |
+| `kube-vip`       | Generate a [kube-vip](https://kube-vip.io) manifest Pod                                                 |
+| `pulumi`         | Build [Pulumi](https://www.pulumi.com) providers, schemas, and language SDKs                            |
+| `pulumiPackages` | Prebuilt Pulumi provider plugins, language runtimes, and components                                     |
+| `terraform`      | Generate Terraform provider code and specs using `terraform-plugin-codegen`                             |
+| `tree-sitter`    | Build, generate, parse, and query [tree-sitter](https://tree-sitter.github.io) grammars                 |
+| `typescript`     | Generate TypeScript types from an OpenAPI spec                                                          |
+| `upjet`          | Generate [Upjet](https://github.com/crossplane/upjet)-based Crossplane providers                        |
 
 ## Requirements
 
@@ -62,6 +64,51 @@ in
 ```
 
 Each builder folder under [`nix/lib/`](nix/lib) has its own arguments, check the `default.nix` in that folder (e.g. [`nix/lib/typescript/default.nix`](nix/lib/typescript/default.nix)) to see what it expects.
+
+`pulumi` and `pulumiPackages` are the two exceptions, with no folder of their own, see below.
+
+## Pulumi
+
+`lib.pulumi` and `lib.pulumiPackages` are re-exports of two sibling flakes, so a2b is the only input you need for either.
+
+`lib.pulumi` holds the builders from [pulumi2nix](https://github.com/UnstoppableMango/pulumi2nix): one per Pulumi artifact (`mkGenTool`, `mkSchema`, `mkProviderPlugin`, `mkSdkSource`, `mkSdk`), plus recipes that compose them (`mkPulumiPackage`, `mkTerraformBridgeProvider`, `mkComponentPackage`, `mkDynamicBridgeProvider`).
+
+```nix
+{ a2b, pkgs, ... }:
+let
+  pulumi = a2b.legacyPackages.${pkgs.system}.lib.pulumi;
+in
+{
+  packages.my-provider = pulumi.mkTerraformBridgeProvider rec {
+    owner = "pulumi";
+    repo = "pulumi-random";
+    version = "4.14.0";
+    hash = "sha256-...";
+    vendorHash = "sha256-...";
+    cmdGen = "pulumi-tfgen-random";
+    cmdRes = "pulumi-resource-random";
+  };
+}
+```
+
+Every argument each builder accepts is documented in [pulumi2nix's `docs/usage.md`](https://github.com/UnstoppableMango/pulumi2nix/blob/main/docs/usage.md).
+
+`lib.pulumiPackages` is the package set from [pulumipkgs](https://github.com/unmango/pulumipkgs): providers already packaged at a pinned version, the language runtimes the Pulumi CLI shells out to, and source-based components.
+
+```nix
+devShells.default = pkgs.mkShell {
+  packages = [
+    pkgs.pulumi
+    a2b.legacyPackages.${pkgs.system}.lib.pulumiPackages.github
+    a2b.legacyPackages.${pkgs.system}.lib.pulumiPackages.pulumi-nodejs
+  ];
+};
+```
+
+Two further outputs re-export the pieces that don't fit under `lib`:
+
+- `a2b.overlays.pulumiPackages` adds `pulumiPackages` to your own nixpkgs, reachable as `pkgs.pulumiPackages.<name>`.
+- `a2b.flakeModules.pulumi` is pulumi2nix's flake-parts module, which turns a `pulumi.terraformBridgeProviders.<name>` declaration into `packages.<name>` along with its schema and SDK outputs.
 
 ## Vendoring external protos
 

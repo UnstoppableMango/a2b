@@ -115,11 +115,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1783776592,
-        "narHash": "sha256-UgCQzxeWI75XM8G+hPrPh+MKzEPjG3SpAj7dtqSbksA=",
+        "lastModified": 1787498568,
+        "narHash": "sha256-9i/VTdusq/+NM/tz+J1Re+ojkMB8MBf0QshnYfzHz30=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e7a3ca8092b61ff85b6a45bf863ea2b2d6a661b3",
+        "rev": "56c02bc00adcf003215cc4bd996d6efaf4cff188",
         "type": "github"
       },
       "original": {
@@ -144,11 +144,74 @@
         "type": "github"
       }
     },
+    "pulumi2nix": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ],
+        "treefmt-nix": [
+          "treefmt-nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787597684,
+        "narHash": "sha256-pbr/s3/JzLLI2lDI8tueABsWl6TE5Fe/aHye4cYjrBY=",
+        "owner": "UnstoppableMango",
+        "repo": "pulumi2nix",
+        "rev": "f30295373306f79a00c35327a9f4cacc2a1cf557",
+        "type": "github"
+      },
+      "original": {
+        "owner": "UnstoppableMango",
+        "repo": "pulumi2nix",
+        "type": "github"
+      }
+    },
+    "pulumipkgs": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "pulumi2nix": [
+          "pulumi2nix"
+        ],
+        "systems": [
+          "systems"
+        ],
+        "treefmt-nix": [
+          "treefmt-nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787604135,
+        "narHash": "sha256-IVoCrElWkobsHK5MHn6ckgIXIDukHjwyZmWBOMCb/IE=",
+        "owner": "unmango",
+        "repo": "pulumipkgs",
+        "rev": "c1d8761340fc4d98a6a79e17709c9b580b9b67ec",
+        "type": "github"
+      },
+      "original": {
+        "owner": "unmango",
+        "repo": "pulumipkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
         "mangopkgs": "mangopkgs",
         "nixpkgs": "nixpkgs",
+        "pulumi2nix": "pulumi2nix",
+        "pulumipkgs": "pulumipkgs",
         "systems": "systems",
         "treefmt-nix": "treefmt-nix"
       }
