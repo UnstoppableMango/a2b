@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package example.api.v1;
+
+option go_package = "example/api/v1;apiv1";
+
+// Resolves only when the vendored module is part of the same buf workspace.
+import "example/dep/v1/dep.proto";
+
+message Api {
+  example.dep.v1.Dep dep = 1;
+}

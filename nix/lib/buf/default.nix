@@ -8,6 +8,8 @@ let
     convert = callPackage ./convert.nix { };
     generate = callPackage ./generate.nix { };
     mkTemplate = callPackage ./mk-template.nix { };
+    mkWorkspace = callPackage ./mk-workspace.nix { };
+    vendor = callPackage ./vendor.nix { };
   };
 in
 packages

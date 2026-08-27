@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package example.dep.v1;
+
+option go_package = "example/dep/v1;depv1";
+
+message Dep {
+  string id = 1;
+}
