@@ -1,9 +1,6 @@
-# Assemble proto trees into a v2 buf workspace directory. Modules resolve
-# imports between each other, so listing a vendored tree here is enough to make
-# it importable: no `deps`, no buf.lock, no network at build time.
-#
-# Each entry in `modules` is `{ path, src, vendor ? false, ... }`; every other
-# attr passes through to the module entry in buf.yaml as-is.
+# Modules in a v2 workspace resolve imports between each other, so listing a
+# vendored tree here is enough to make it importable: no `deps`, no buf.lock,
+# no network at build time.
 {
   formats,
   lib,

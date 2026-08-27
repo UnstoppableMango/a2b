@@ -15,14 +15,8 @@
   src,
   template ? null,
 }:
-# To generate for one module of a `buf.mkWorkspace` result, point `src` at that
-# module directory, e.g. `src = "${workspace}/proto"`. Buf walks up to the
-# workspace buf.yaml, so imports still resolve against every other module while
-# only that module's files are generated.
-#
-# `paths` and `excludePaths` narrow further, and are resolved relative to the
-# working directory, so prefix them with `src` for a store path. Buf rejects a
-# path that is itself a module root; use it as the input instead.
+# `paths` and `excludePaths` resolve relative to the working directory, so
+# prefix them with `src`. Buf rejects a path that is itself a module root.
 runCommand name env ''
   runHook preRun
 

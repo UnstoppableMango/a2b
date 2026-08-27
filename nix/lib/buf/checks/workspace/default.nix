@@ -1,4 +1,3 @@
-# Generates from a two-module workspace where api imports the vendored module.
 {
   a2b,
   protoc-gen-go,

@@ -1,6 +1,5 @@
-# Exposes the builders as legacyPackages.lib. pulumi2nix's lib and pulumipkgs'
-# overlay are system-independent, so they come off the top level `inputs`, which
-# flake-parts does not pass into perSystem.
+# pulumi2nix's lib and pulumipkgs' overlay are system-independent, so they come
+# off the top level `inputs`, which flake-parts does not pass into perSystem.
 { inputs, ... }:
 {
   perSystem =

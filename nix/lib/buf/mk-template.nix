@@ -1,5 +1,3 @@
-# Generate a buf.gen.yaml template. Plugins with a `package` attr resolve to
-# `local:` paths; all other attrs pass through to the YAML as-is.
 { formats, lib }:
 {
   name ? "buf.gen.yaml",
