@@ -31,7 +31,7 @@ let
           "bin"
         ];
       in
-      rest // { local = if plugin ? bin then "${pkg}/bin/${binName}" else lib.getExe pkg; }
+      rest // { local = if plugin ? bin then "${pkg}/bin/${plugin.bin}" else lib.getExe pkg; }
     else
       plugin;
 
@@ -39,13 +39,16 @@ let
 
   yamlValue =
     removeAttrs attrs [
+      "inputs"
       "name"
       "plugins"
     ]
     // {
       version = attrs.version or "v2";
-      inherit inputs;
       plugins = resolvedPlugins;
-    };
+    }
+    # An `inputs` key competes with the input argument and --path passed on the
+    # command line, so only emit it when the caller actually configured one.
+    // lib.optionalAttrs (inputs != [ ]) { inherit inputs; };
 in
 fmt.generate name yamlValue
