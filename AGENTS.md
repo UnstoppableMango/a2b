@@ -28,11 +28,14 @@ make nix/lib/typescript/npm/package-lock.json
   - `flux` — `createKustomization`, `createSourceGit`, `gotkComponents`, `install` for Flux CD
   - `gossamer` — `build`, `check`, `runCommand` derivations
   - `kube-vip` — `manifestPod` for kube-vip manifest generation
+  - `pulumi` — re-export of [UnstoppableMango/pulumi2nix](https://github.com/UnstoppableMango/pulumi2nix)'s builders (`mkPulumiPackage`, `mkTerraformBridgeProvider`, `mkComponentPackage`, `mkSdkSource`, ...), not defined here
+  - `pulumiPackages` — re-export of [unmango/pulumipkgs](https://github.com/unmango/pulumipkgs)' provider plugins, language runtimes, and components, not defined here
   - `terraform` — `genProviderSpec`, `genProvider`, `scaffold` using `terraform-plugin-codegen-*` tools
   - `tree-sitter` — `build`, `generate`, `highlight`, `init`, `parse`, `playground`, `query` derivations
   - `typescript` — `openapi-typescript` for generating TypeScript types from OpenAPI specs
   - `upjet` — `genProviderTemplate`, `genProvider` for Upjet-based Crossplane providers
   - `strings` — utility: `toSnakeCase`
+- `flake.overlays.pulumiPackages` and `flake.flakeModules.pulumi` re-export pulumipkgs' overlay and pulumi2nix's flake-parts module, so a consumer reaches both through a2b alone.
 
 ### Gotchas
 

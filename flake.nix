@@ -21,6 +21,25 @@
       inputs.treefmt-nix.follows = "treefmt-nix";
     };
 
+    pulumi2nix = {
+      url = "github:UnstoppableMango/pulumi2nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.treefmt-nix.follows = "treefmt-nix";
+    };
+
+    # pulumipkgs consumes pulumi2nix. Pointing it at the input above keeps
+    # lib.pulumi and the builders behind lib.pulumiPackages on one revision.
+    pulumipkgs = {
+      url = "github:unmango/pulumipkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.treefmt-nix.follows = "treefmt-nix";
+      inputs.pulumi2nix.follows = "pulumi2nix";
+    };
+
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,6 +56,14 @@
         ./nix/lib/flake-module.nix
       ];
 
+      # Re-exported from the sibling flakes so a consumer that already depends
+      # on a2b reaches pulumi2nix's option tree and pulumipkgs' package set
+      # without adding either as an input of its own.
+      flake = {
+        overlays.pulumiPackages = inputs.pulumipkgs.overlays.default;
+        flakeModules.pulumi = inputs.pulumi2nix.flakeModules.default;
+      };
+
       perSystem =
         { pkgs, ... }:
         {
@@ -50,6 +77,7 @@
               nixd
               nixfmt
               nodejs
+              pulumi
               tree-sitter
             ];
           };
