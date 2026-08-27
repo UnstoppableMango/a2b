@@ -1,16 +1,5 @@
-# Generate a buf.gen.yaml template file.
-#
-# Plugins with a `package` attr are resolved to `local:` paths automatically;
-# all other attrs pass through to the YAML as-is.
-#
-# Example:
-#   buf.mkTemplate {
-#     inputs = [{ directory = "."; }];
-#     plugins = [
-#       { package = pkgs.protoc-gen-go; out = "gen/go"; }
-#       { plugin = "buf.build/connectrpc/es"; out = "gen/es"; }
-#     ];
-#   }
+# Generate a buf.gen.yaml template. Plugins with a `package` attr resolve to
+# `local:` paths; all other attrs pass through to the YAML as-is.
 { formats, lib }:
 {
   name ? "buf.gen.yaml",
@@ -47,8 +36,8 @@ let
       version = attrs.version or "v2";
       plugins = resolvedPlugins;
     }
-    # An `inputs` key competes with the input argument and --path passed on the
-    # command line, so only emit it when the caller actually configured one.
+    # An `inputs` key competes with the input argument and --path on the command
+    # line, so only emit it when the caller configured one.
     // lib.optionalAttrs (inputs != [ ]) { inherit inputs; };
 in
 fmt.generate name yamlValue

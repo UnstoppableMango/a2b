@@ -1,6 +1,4 @@
-# Generates from a two-module workspace where the api module imports the vendored
-# one. Fails if the vendored protos aren't resolvable as imports, or if they leak
-# into the generated output.
+# Generates from a two-module workspace where api imports the vendored module.
 {
   a2b,
   protoc-gen-go,

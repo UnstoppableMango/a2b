@@ -1,9 +1,8 @@
 {
   description = "ux plugins";
 
-  # legacyPackages.lib.upjet transitively depends on mangopkgs'
-  # gomod2nix-based buildGoApplication, which requires IFD to evaluate.
-  # Building that output needs allow-import-from-derivation=true regardless.
+  # legacyPackages.lib.upjet needs IFD regardless, via mangopkgs' gomod2nix-based
+  # buildGoApplication. Build it with allow-import-from-derivation=true.
   nixConfig = {
     allow-import-from-derivation = false;
   };
@@ -29,8 +28,8 @@
       inputs.treefmt-nix.follows = "treefmt-nix";
     };
 
-    # pulumipkgs consumes pulumi2nix. Pointing it at the input above keeps
-    # lib.pulumi and the builders behind lib.pulumiPackages on one revision.
+    # Following pulumi2nix keeps lib.pulumi and the builders behind
+    # lib.pulumiPackages on one revision.
     pulumipkgs = {
       url = "github:unmango/pulumipkgs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -56,9 +55,7 @@
         ./nix/lib/flake-module.nix
       ];
 
-      # Re-exported from the sibling flakes so a consumer that already depends
-      # on a2b reaches pulumi2nix's option tree and pulumipkgs' package set
-      # without adding either as an input of its own.
+      # Re-exported so a consumer reaches both through a2b alone.
       flake = {
         overlays.pulumiPackages = inputs.pulumipkgs.overlays.default;
         flakeModules.pulumi = inputs.pulumi2nix.flakeModules.default;

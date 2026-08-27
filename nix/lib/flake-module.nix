@@ -1,9 +1,6 @@
-# flake-parts module exposing the builders as legacyPackages.lib, along with the
-# checks that exercise them. Checks live next to the builder they cover, e.g.
-# nix/lib/buf/checks/.
-#
-# pulumi2nix's lib and pulumipkgs' overlay are system-independent, so they come
-# off the top level `inputs`, which flake-parts does not pass into perSystem.
+# Exposes the builders as legacyPackages.lib. pulumi2nix's lib and pulumipkgs'
+# overlay are system-independent, so they come off the top level `inputs`, which
+# flake-parts does not pass into perSystem.
 { inputs, ... }:
 {
   perSystem =
@@ -26,27 +23,23 @@
 
         pulumi2nixLib = inputs.pulumi2nix.lib;
 
-        # Passed explicitly because nixpkgs carries its own, much smaller,
-        # pulumiPackages that callPackage would otherwise fill in here.
+        # Explicit because callPackage would otherwise fill in nixpkgs' own,
+        # much smaller, pulumiPackages.
         inherit (pkgs.extend inputs.pulumipkgs.overlays.default) pulumiPackages;
       };
 
       checks = {
-        # Forces legacyPackages.lib to evaluate, catching import errors and wrong
-        # function signatures. Does NOT catch missing attrs from external inputs;
-        # those propagate as lazy error thunks until a derivation is actually built.
+        # Forces legacyPackages.lib to evaluate. Attrs from external inputs stay
+        # lazy error thunks until a derivation is actually built.
         lib = pkgs.writeText "lib-check" (builtins.toJSON (builtins.attrNames a2b));
 
         buf-workspace = pkgs.callPackage ./buf/checks/workspace { inherit a2b; };
 
-        # Cheap enough to run on every system under --all-systems, which catches
-        # a renamed or removed pulumi2nix builder that the native-only smoke
-        # build below would miss.
+        # Runs on every system under --all-systems, catching a renamed pulumi2nix
+        # builder that the native-only build below would miss.
         pulumi-lib = pkgs.writeText "pulumi-lib-check" (builtins.toJSON (builtins.attrNames a2b.pulumi));
 
-        # Proves the pulumipkgs re-export builds rather than merely evaluating.
-        # random is the cheapest package in the set that still runs
-        # mkTerraformBridgeProvider end to end: gen tool, schema, plugin binary.
+        # Cheapest package that still runs mkTerraformBridgeProvider end to end.
         pulumi-random = a2b.pulumiPackages.random;
       };
     };
