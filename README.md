@@ -4,6 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Built with Nix](https://img.shields.io/badge/Built%20with-Nix-5277C3?logo=nixos&logoColor=white)](https://nixos.org)
 [![Last commit](https://img.shields.io/github/last-commit/UnstoppableMango/a2b)](https://github.com/UnstoppableMango/a2b/commits/main)
+[![Hercules CI](https://hercules-ci.com/api/v1/site/github/account/UnstoppableMango/project/a2b/badge)](https://hercules-ci.com/github/UnstoppableMango/a2b)
 
 A grab-bag of [Nix](https://nixos.org) builders that generate config, code, and manifests for common developer tools, protobufs with Buf, Kubernetes manifests with Flux, Terraform providers, tree-sitter grammars, TypeScript types from OpenAPI, and more.
 
