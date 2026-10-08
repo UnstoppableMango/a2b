@@ -17,6 +17,7 @@
       legacyPackages.lib = pkgs.callPackage ./. {
         inherit (inputs'.mangopkgs.packages)
           gossamer
+          likec4
           terraform-plugin-codegen-framework
           terraform-plugin-codegen-openapi
           ;
@@ -36,6 +37,8 @@
         lib = pkgs.writeText "lib-check" (builtins.toJSON (builtins.attrNames a2b));
 
         buf-workspace = pkgs.callPackage ./buf/checks/workspace { inherit a2b; };
+
+        likec4-model = pkgs.callPackage ./likec4/checks/model { inherit a2b; };
 
         unified-run = pkgs.callPackage ./unified/checks { inherit a2b unifiedPackages; };
 

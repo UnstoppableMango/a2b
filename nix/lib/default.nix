@@ -1,6 +1,7 @@
 {
   pkgs,
   gossamer,
+  likec4,
   pulumi2nixLib,
   pulumiPackages,
   terraform-plugin-codegen-framework,
@@ -20,6 +21,7 @@ in
   flux = pkgs.callPackage ./flux { };
   gossamer = pkgs.callPackage ./gossamer { inherit gossamer; };
   kube-vip = pkgs.callPackage ./kube-vip { };
+  likec4 = pkgs.callPackage ./likec4 { inherit likec4; };
 
   # pulumi2nix's flake.lib is a `{ pkgs }:` function rather than an attrset.
   pulumi = pulumi2nixLib { inherit pkgs; };
