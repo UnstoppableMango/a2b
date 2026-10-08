@@ -22,6 +22,8 @@
 
         pulumi2nixLib = inputs.pulumi2nix.lib;
 
+        inherit (config.legacyPackages) unifiedPackages;
+
         # Explicit because callPackage would otherwise fill in nixpkgs' own,
         # much smaller, pulumiPackages.
         inherit (pkgs.extend inputs.pulumipkgs.overlays.default) pulumiPackages;

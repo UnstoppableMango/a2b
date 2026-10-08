@@ -5,6 +5,7 @@
   pulumiPackages,
   terraform-plugin-codegen-framework,
   terraform-plugin-codegen-openapi,
+  unifiedPackages,
 }:
 let
   lib = pkgs.lib.extend (
@@ -31,5 +32,13 @@ in
 
   tree-sitter = pkgs.callPackage ./tree-sitter { };
   typescript = pkgs.callPackage ./typescript { };
+
+  # A plain-function facade over the unifiedPackages scope, for consumers who
+  # never apply the overlay.
+  unified = {
+    run = unifiedPackages.unifiedRun;
+    rc = unifiedPackages.unifiedRc;
+  };
+
   upjet = pkgs.callPackage ./upjet { };
 }

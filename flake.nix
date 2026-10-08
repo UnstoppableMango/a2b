@@ -54,6 +54,7 @@
         inputs.systems.flakeModule
         inputs.treefmt-nix.flakeModule
         ./nix/lib/flake-module.nix
+        ./nix/pkgs/flake-module.nix
       ];
 
       # Re-exported so a consumer reaches both through a2b alone.
@@ -89,6 +90,8 @@
                 excludes = [
                   "**/package-lock.json"
                   ".claude/**"
+                  # Inputs whose formatting the unified checks assert on.
+                  "nix/pkgs/unified/checks/fixture/**"
                 ];
               };
             };
