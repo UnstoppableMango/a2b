@@ -13,8 +13,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     mangopkgs = {
-      # unifiedPackages lands in unmango/pkgs#137; back to main once it merges.
-      url = "github:unmango/pkgs?ref=claude/project-thread-he6vvn";
+      url = "github:unmango/pkgs";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.flake-parts.follows = "flake-parts";
