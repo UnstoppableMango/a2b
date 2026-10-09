@@ -5,6 +5,7 @@
   pulumiPackages,
   terraform-plugin-codegen-framework,
   terraform-plugin-codegen-openapi,
+  unifiedPackages,
 }:
 let
   lib = pkgs.lib.extend (
@@ -31,5 +32,12 @@ in
 
   tree-sitter = pkgs.callPackage ./tree-sitter { };
   typescript = pkgs.callPackage ./typescript { };
+
+  unified = pkgs.callPackage ./unified { inherit unifiedPackages; };
+
+  # Re-exported from unmango/pkgs, like pulumiPackages, so the plugins reach
+  # a consumer through a2b alone.
+  inherit unifiedPackages;
+
   upjet = pkgs.callPackage ./upjet { };
 }
