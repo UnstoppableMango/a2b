@@ -33,11 +33,10 @@ make nix/lib/typescript/npm/package-lock.json
   - `terraform` — `genProviderSpec`, `genProvider`, `scaffold` using `terraform-plugin-codegen-*` tools
   - `tree-sitter` — `build`, `generate`, `highlight`, `init`, `parse`, `playground`, `query` derivations
   - `typescript` — `openapi-typescript` for generating TypeScript types from OpenAPI specs
-  - `unified` — facade over `unifiedPackages` (`run`, `rc`)
+  - `unified` — `run` (runs a unified CLI over a source tree, files rewritten in place) and `rc` (writes an rc naming plugins by the store path of their entry file, `passthru.unifiedPlugin`)
+  - `unifiedPackages` — re-export of [unmango/pkgs](https://github.com/unmango/pkgs)' unified.js package set (remark-cli, plugins), not defined here
   - `upjet` — `genProviderTemplate`, `genProvider` for Upjet-based Crossplane providers
   - `strings` — utility: `toSnakeCase`
-- `nix/pkgs/` — package sets shipped through `overlays.default` and `legacyPackages`:
-  - `unified/` — the `unifiedPackages` scope (`lib.makeScope`). Each upstream repo is fetched once from source with a vendored `package-lock.json` (upstream sets `package-lock=false`); monorepos also carry a `workspaces.json` from `workspaces.sh`, so no package.json is read at eval time. Builders (`unifiedRun`, `unifiedRc`, `wrapUnifiedCli`) are scope members. Plugins go into the rc as absolute store paths to their entry file (ESM refuses directory imports), never by package name.
 - `flake.overlays.pulumiPackages` and `flake.flakeModules.pulumi` re-export pulumipkgs' overlay and pulumi2nix's flake-parts module, so a consumer reaches both through a2b alone.
 
 ### Gotchas

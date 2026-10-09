@@ -3,9 +3,9 @@
 #
 #   plugins = [ remark-gfm [ remark-toc { heading = "Contents"; } ] "/abs/plugin.js" ];
 #
-# A derivation resolves to its package's entry file: `passthru.unifiedEntry`
-# when set, else index.js, which every unified plugin uses. ESM refuses
-# directory imports, so the file has to be named.
+# A derivation resolves to its entry file, `passthru.unifiedPlugin`, which
+# every plugin in unmango/pkgs' unifiedPackages sets. ESM refuses directory
+# imports, so the file has to be named.
 { lib, formats }:
 {
   name ? "unified",
@@ -16,7 +16,8 @@ let
   entry =
     plugin:
     if lib.isDerivation plugin then
-      "${plugin}/lib/node_modules/${plugin.pname}/${plugin.unifiedEntry or "index.js"}"
+      plugin.unifiedPlugin
+        or (throw "${plugin.name} has no passthru.unifiedPlugin; pass the path of its entry file instead")
     else
       toString plugin;
 

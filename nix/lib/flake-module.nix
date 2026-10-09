@@ -11,6 +11,7 @@
     }:
     let
       a2b = config.legacyPackages.lib;
+      inherit (inputs'.mangopkgs.legacyPackages) unifiedPackages;
     in
     {
       legacyPackages.lib = pkgs.callPackage ./. {
@@ -22,7 +23,7 @@
 
         pulumi2nixLib = inputs.pulumi2nix.lib;
 
-        inherit (config.legacyPackages) unifiedPackages;
+        inherit unifiedPackages;
 
         # Explicit because callPackage would otherwise fill in nixpkgs' own,
         # much smaller, pulumiPackages.
@@ -35,6 +36,8 @@
         lib = pkgs.writeText "lib-check" (builtins.toJSON (builtins.attrNames a2b));
 
         buf-workspace = pkgs.callPackage ./buf/checks/workspace { inherit a2b; };
+
+        unified-run = pkgs.callPackage ./unified/checks { inherit a2b unifiedPackages; };
 
         # Runs on every system under --all-systems, catching a renamed pulumi2nix
         # builder that the native-only build below would miss.

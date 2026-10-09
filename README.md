@@ -29,7 +29,7 @@ These builders wrap that tooling as Nix derivations instead, so the generated ou
 | `terraform`      | Generate Terraform provider code and specs using `terraform-plugin-codegen`                             |
 | `tree-sitter`    | Build, generate, parse, and query [tree-sitter](https://tree-sitter.github.io) grammars                 |
 | `typescript`     | Generate TypeScript types from an OpenAPI spec                                                          |
-| `unified`        | Run [unified](https://unifiedjs.com) (remark) over a source tree, with plugins from `unifiedPackages`   |
+| `unified`        | Run [unified](https://unifiedjs.com) (remark) over a source tree, with plugins from unmango/pkgs        |
 | `upjet`          | Generate [Upjet](https://github.com/crossplane/upjet)-based Crossplane providers                        |
 
 ## Requirements

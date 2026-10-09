@@ -33,12 +33,11 @@ in
   tree-sitter = pkgs.callPackage ./tree-sitter { };
   typescript = pkgs.callPackage ./typescript { };
 
-  # A plain-function facade over the unifiedPackages scope, for consumers who
-  # never apply the overlay.
-  unified = {
-    run = unifiedPackages.unifiedRun;
-    rc = unifiedPackages.unifiedRc;
-  };
+  unified = pkgs.callPackage ./unified { inherit unifiedPackages; };
+
+  # Re-exported from unmango/pkgs, like pulumiPackages, so the plugins reach
+  # a consumer through a2b alone.
+  inherit unifiedPackages;
 
   upjet = pkgs.callPackage ./upjet { };
 }

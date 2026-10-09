@@ -1,6 +1,6 @@
 # Runs a unified CLI over `src` and captures the transformed tree as $out.
 #
-#   unifiedRun {
+#   a2b.unified.run {
 #     name = "docs";
 #     src = ./docs;
 #     plugins = with unifiedPackages; [ remark-gfm ];
@@ -13,7 +13,7 @@
   lib,
   stdenvNoCC,
   remark-cli,
-  unifiedRc,
+  rc,
 }:
 lib.extendMkDerivation {
   constructDrv = stdenvNoCC.mkDerivation;
@@ -41,7 +41,7 @@ lib.extendMkDerivation {
       ...
     }:
     let
-      rc = unifiedRc {
+      rcFile = rc {
         name = finalAttrs.name or "unified";
         inherit plugins settings;
       };
@@ -53,7 +53,7 @@ lib.extendMkDerivation {
       nativeBuildInputs = [ cli ] ++ nativeBuildInputs;
 
       unifiedProgram = cli.meta.mainProgram;
-      unifiedRcPath = rc;
+      unifiedRcPath = rcFile;
       unifiedFlags =
         lib.optionals (extensions != [ ]) [
           "--ext"
@@ -81,7 +81,7 @@ lib.extendMkDerivation {
       '';
 
       passthru = {
-        inherit rc;
+        rc = rcFile;
       }
       // passthru;
     };

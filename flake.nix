@@ -13,7 +13,8 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     mangopkgs = {
-      url = "github:unmango/pkgs";
+      # unifiedPackages lands in unmango/pkgs#137; back to main once it merges.
+      url = "github:unmango/pkgs?ref=claude/project-thread-he6vvn";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.flake-parts.follows = "flake-parts";
@@ -54,7 +55,6 @@
         inputs.systems.flakeModule
         inputs.treefmt-nix.flakeModule
         ./nix/lib/flake-module.nix
-        ./nix/pkgs/flake-module.nix
       ];
 
       # Re-exported so a consumer reaches both through a2b alone.
@@ -91,7 +91,7 @@
                   "**/package-lock.json"
                   ".claude/**"
                   # Inputs whose formatting the unified checks assert on.
-                  "nix/pkgs/unified/checks/fixture/**"
+                  "nix/lib/unified/checks/fixture/**"
                 ];
               };
             };
