@@ -24,6 +24,7 @@ These builders wrap that tooling as Nix derivations instead, so the generated ou
 | `flux`           | Generate [Flux CD](https://fluxcd.io) Kustomizations, GitRepository sources, and install manifests      |
 | `gossamer`       | Build and check Gossamer projects                                                                       |
 | `kube-vip`       | Generate a [kube-vip](https://kube-vip.io) manifest Pod                                                 |
+| `likec4`         | Build, validate, export, and generate code from [LikeC4](https://likec4.dev) architecture models        |
 | `pulumi`         | Build [Pulumi](https://www.pulumi.com) providers, schemas, and language SDKs                            |
 | `pulumiPackages` | Prebuilt Pulumi provider plugins, language runtimes, and components                                     |
 | `terraform`      | Generate Terraform provider code and specs using `terraform-plugin-codegen`                             |
@@ -209,6 +210,43 @@ buf.vendor {
 
 `includes` and `excludes` narrow which subdirectories of `root` are walked.
 Getting `root` wrong fails the build with `buf.vendor: no .proto files found under ...` rather than producing an empty module.
+
+## Architecture diagrams with LikeC4
+
+`lib.likec4` wraps the [LikeC4](https://likec4.dev) CLI, pinned by mangopkgs and patched to run from the store.
+Point any builder at a directory of `.c4` files.
+
+```nix
+{ a2b, pkgs, ... }:
+let
+  likec4 = a2b.legacyPackages.${pkgs.system}.lib.likec4;
+in
+{
+  # Static site with every view, deployable to GitHub Pages or any static host.
+  # `base = "./"` plus hash history makes one build work under any URL prefix.
+  packages.architecture = likec4.build {
+    name = "architecture";
+    src = ./docs/architecture;
+    base = "./";
+    useHashHistory = true;
+  };
+
+  # Fails on broken references and layout drift.
+  checks.architecture = likec4.validate {
+    name = "architecture";
+    src = ./docs/architecture;
+  };
+}
+```
+
+| Builder      | Output                                                                                                         |
+| ------------ | -------------------------------------------------------------------------------------------------------------- |
+| `build`      | Static website, or a self-contained `index.html` with `outputSingleFile = true`                                |
+| `validate`   | Empty file, built only when the model is valid                                                                 |
+| `exportJson` | The model as one JSON file                                                                                     |
+| `codegen`    | Directory of generated files; `format` is `mermaid`, `dot`, `d2`, `plantuml`, `react`, `webcomponent`, `model` |
+
+Every builder takes `flags` for CLI options it doesn't name.
 
 ## Development
 

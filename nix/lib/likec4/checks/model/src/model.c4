@@ -1,0 +1,24 @@
+specification {
+  element actor {
+    style {
+      shape person
+    }
+  }
+  element system
+}
+
+model {
+  user = actor 'User'
+  app = system 'App' {
+    description 'Something worth drawing'
+  }
+
+  user -> app 'uses'
+}
+
+views {
+  view index {
+    title 'Landscape'
+    include *
+  }
+}
