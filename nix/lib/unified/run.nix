@@ -52,7 +52,7 @@ lib.extendMkDerivation {
 
       nativeBuildInputs = [ cli ] ++ nativeBuildInputs;
 
-      unifiedProgram = cli.meta.mainProgram;
+      unifiedProgram = lib.getExe cli;
       unifiedRcPath = rcFile;
       unifiedFlags =
         lib.optionals (extensions != [ ]) [

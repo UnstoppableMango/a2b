@@ -13,7 +13,8 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     mangopkgs = {
-      url = "github:unmango/pkgs";
+      # Pinned to unmango/pkgs#142 (rehype, remark-lint) until it merges.
+      url = "github:unmango/pkgs?ref=claude/project-thread-af6kkl";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.flake-parts.follows = "flake-parts";
@@ -90,7 +91,7 @@
                   "**/package-lock.json"
                   ".claude/**"
                   # Inputs whose formatting the unified checks assert on.
-                  "nix/lib/unified/checks/fixture/**"
+                  "nix/lib/unified/checks/fixture*/**"
                 ];
               };
             };
