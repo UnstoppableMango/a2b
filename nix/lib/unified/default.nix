@@ -1,29 +1,22 @@
 # Builders that run a unified CLI and capture its output. The CLIs and plugins
 # themselves come from unmango/pkgs' unifiedPackages.
-{
-  lib,
-  callPackage,
-  unifiedPackages,
-}:
+{ callPackage, unifiedPackages }:
 let
   rc = callPackage ./rc.nix { };
+in
+{
+  inherit rc;
 
   run = callPackage ./run.nix {
     inherit rc;
-    inherit (unifiedPackages) remark-cli;
+    unifiedCli = unifiedPackages.remark-cli;
   };
-in
-{
-  inherit rc run;
 
-  # run with rehype-cli, for HTML. Takes what run takes, attrs or a
-  # finalAttrs function.
-  rehype =
-    args:
-    run (
-      finalAttrs:
-      { cli = unifiedPackages.rehype-cli; } // (if lib.isFunction args then args finalAttrs else args)
-    );
+  # run with rehype-cli, for HTML.
+  rehype = callPackage ./run.nix {
+    inherit rc;
+    unifiedCli = unifiedPackages.rehype-cli;
+  };
 
   lint = callPackage ./lint.nix {
     inherit rc;
