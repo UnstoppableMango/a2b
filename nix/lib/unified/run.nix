@@ -12,7 +12,8 @@
 {
   lib,
   stdenvNoCC,
-  remark-cli,
+  # The CLI used when the caller passes no `cli`.
+  unifiedCli,
   rc,
 }:
 lib.extendMkDerivation {
@@ -28,7 +29,7 @@ lib.extendMkDerivation {
   extendDrvArgs =
     finalAttrs:
     {
-      cli ? remark-cli,
+      cli ? unifiedCli,
       plugins ? [ ],
       settings ? { },
       # File extensions to process, e.g. [ "md" "mdx" ]. The CLI's own default
@@ -52,7 +53,7 @@ lib.extendMkDerivation {
 
       nativeBuildInputs = [ cli ] ++ nativeBuildInputs;
 
-      unifiedProgram = cli.meta.mainProgram;
+      unifiedProgram = lib.getExe cli;
       unifiedRcPath = rcFile;
       unifiedFlags =
         lib.optionals (extensions != [ ]) [

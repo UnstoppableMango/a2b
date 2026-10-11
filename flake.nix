@@ -90,7 +90,7 @@
                   "**/package-lock.json"
                   ".claude/**"
                   # Inputs whose formatting the unified checks assert on.
-                  "nix/lib/unified/checks/fixture/**"
+                  "nix/lib/unified/checks/fixture*/**"
                 ];
               };
             };
