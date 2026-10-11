@@ -9,6 +9,17 @@ in
 
   run = callPackage ./run.nix {
     inherit rc;
-    inherit (unifiedPackages) remark-cli;
+    unifiedCli = unifiedPackages.remark-cli;
+  };
+
+  # run with rehype-cli, for HTML.
+  rehype = callPackage ./run.nix {
+    inherit rc;
+    unifiedCli = unifiedPackages.rehype-cli;
+  };
+
+  lint = callPackage ./lint.nix {
+    inherit rc;
+    inherit (unifiedPackages) remark-cli remark-preset-lint-recommended;
   };
 }
