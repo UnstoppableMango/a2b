@@ -13,8 +13,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     mangopkgs = {
-      # Pinned to unmango/pkgs#142 (rehype, remark-lint) until it merges.
-      url = "github:unmango/pkgs?ref=claude/project-thread-af6kkl";
+      url = "github:unmango/pkgs";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.flake-parts.follows = "flake-parts";
