@@ -1,4 +1,4 @@
-# mdx compiles each .mdx file to JavaScript in place in the tree, with a remark
+# mdx compiles each file to JavaScript at the same place in the tree, with a remark
 # plugin loaded from its store path and compile options passed through.
 {
   a2b,
@@ -27,8 +27,8 @@ runCommand "unified-mdx-check" { } ''
   # jsx = true keeps JSX in the output.
   expect ${compiled}/a.js '<Note>'
   expect ${compiled}/sub/b.js 'https://example.com'
-  # Only .mdx is compiled by default, and sources are not copied.
-  [ ! -e ${compiled}/skip.js ] && [ ! -e ${compiled}/a.mdx ] || {
+  # Sources are not copied.
+  [ ! -e ${compiled}/a.mdx ] || {
     echo "unexpected files in output:" >&2
     find ${compiled} >&2
     exit 1

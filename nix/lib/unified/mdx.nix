@@ -1,5 +1,7 @@
-# Compiles every MDX file in `src` to JavaScript with @mdx-js/mdx. $out keeps
-# src's layout, holding only the compiled `.js` files.
+# Compiles every file in `src` to JavaScript with @mdx-js/mdx, which reads
+# `.md` as markdown and anything else as MDX. $out keeps src's layout,
+# holding only the compiled `.js` files. Narrow `src` with lib.fileset to
+# leave files out.
 #
 #   a2b.unified.mdx {
 #     name = "docs";
@@ -26,7 +28,6 @@ lib.extendMkDerivation {
     "rehypePlugins"
     "recmaPlugins"
     "options"
-    "extensions"
   ];
 
   extendDrvArgs =
@@ -37,8 +38,6 @@ lib.extendMkDerivation {
       rehypePlugins ? [ ],
       recmaPlugins ? [ ],
       options ? { },
-      # `md` files compile as plain markdown, `mdx` ones as MDX.
-      extensions ? [ "mdx" ],
       nativeBuildInputs ? [ ],
       passthru ? { },
       ...
@@ -61,22 +60,14 @@ lib.extendMkDerivation {
 
       mdxProgram = lib.getExe cli;
       mdxOptionsPath = optionsFile;
-      mdxExtensions = extensions;
 
       buildPhase = ''
         runHook preBuild
 
         files=()
-        for ext in "''${mdxExtensions[@]}"; do
-          while IFS= read -r -d "" file; do
-            files+=("$file")
-          done < <(find . -type f -name "*.$ext" -print0 | sort -z)
-        done
-
-        if [ ''${#files[@]} -eq 0 ]; then
-          echo "no files with extensions ''${mdxExtensions[*]} in src" >&2
-          exit 1
-        fi
+        while IFS= read -r -d "" file; do
+          files+=("$file")
+        done < <(find . -type f -print0 | sort -z)
 
         "$mdxProgram" --options "$mdxOptionsPath" --out-dir "$NIX_BUILD_TOP/compiled" "''${files[@]}"
 
