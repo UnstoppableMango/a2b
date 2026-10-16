@@ -1,10 +1,12 @@
 {
-  env ? { },
   gossamer,
-  name,
   runCommand,
-  script,
   writeText,
+}:
+{
+  env ? { },
+  name,
+  script,
 }:
 let
   scriptFile = writeText "${name}.gos" script;

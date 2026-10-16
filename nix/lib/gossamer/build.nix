@@ -1,18 +1,20 @@
 {
   cli,
+  gossamer,
+  lib,
+  runCommandCC,
+}:
+{
   env ? { },
   file ? null,
   flags ? [ ],
-  gossamer,
-  lib,
   locked ? false,
   name,
   release ? false,
-  runCommand,
   src,
   target ? null,
 }:
-runCommand name env ''
+runCommandCC name env ''
   runHook preBuild
 
   cp -r ${src} source

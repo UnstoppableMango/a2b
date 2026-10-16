@@ -4,7 +4,7 @@ let
     pname = "openapi-typescript";
     version = "7.13.0";
     src = ./npm;
-    npmDepsHash = "sha256-wvsOoRLsKxLMOgW6rxj4VrfXHbFqoeRFg9l6lPauVI0=";
+    npmDepsHash = "sha256-8OarmQHtnxzyoP9q5DYvt/luP4Z6EFj+EDMLiC9Jt8A=";
     dontNpmBuild = true;
   };
 

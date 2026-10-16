@@ -5,24 +5,27 @@
 }:
 {
   env ? { },
-  grammarPath ? null,
+  grammarPath,
   update ? null,
 }:
 let
   boolFlag = name: val: lib.optionalString (val != null) "--${name}";
-  valFlag = name: val: lib.optionalString (val != null) "--${name} ${lib.escapeShellArg "${val}"}";
 
   updateArg = boolFlag "update" update;
-  grammarPathArg = valFlag "grammar-path" grammarPath;
 in
+# init scaffolds bindings into the grammar directory in place, and only runs
+# unattended when that directory already has a tree-sitter.json.
 runCommand "tree-sitter-init" env ''
   runHook preRun
 
   export HOME="$(mktemp -d)"
 
+  cp -r ${lib.escapeShellArg "${grammarPath}"} $out
+  chmod -R u+w $out
+
   ${tree-sitter}/bin/tree-sitter init \
     ${updateArg} \
-    ${grammarPathArg}
+    --grammar-path $out
 
   runHook postRun
 ''

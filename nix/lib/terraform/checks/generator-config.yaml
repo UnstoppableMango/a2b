@@ -1,0 +1,17 @@
+provider:
+  name: petstore
+
+resources:
+  pet:
+    create:
+      path: /pets
+      method: POST
+    read:
+      path: /pets/{id}
+      method: GET
+
+data_sources:
+  pet:
+    read:
+      path: /pets/{id}
+      method: GET
