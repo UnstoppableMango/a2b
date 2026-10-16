@@ -1,14 +1,16 @@
 {
   cli,
+  gossamer,
+  lib,
+  runCommand,
+}:
+{
   env ? { },
   file ? null,
   flags ? [ ],
-  gossamer,
-  lib,
   locked ? false,
   name,
   release ? false,
-  runCommand,
   src,
   target ? null,
 }:

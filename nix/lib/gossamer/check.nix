@@ -1,11 +1,13 @@
 {
+  gossamer,
+  lib,
+  runCommand,
+}:
+{
   env ? { },
   file ? null,
   flags ? [ ],
-  gossamer,
-  lib,
   name,
-  runCommand,
   src,
 }:
 runCommand name env ''
