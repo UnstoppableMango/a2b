@@ -145,6 +145,39 @@
         "type": "github"
       }
     },
+    "openapi2go": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "gomod2nix": [
+          "mangopkgs",
+          "gomod2nix"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ],
+        "treefmt-nix": [
+          "treefmt-nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790002315,
+        "narHash": "sha256-JZw0eZgfUbgCT/oMFL9gNnA8phWsldKLGQYBUFQ/gKc=",
+        "owner": "UnstoppableMango",
+        "repo": "openapi2go",
+        "rev": "65bc1785e49a7b73313b2911bfb1a0b2624859fe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "UnstoppableMango",
+        "repo": "openapi2go",
+        "type": "github"
+      }
+    },
     "pulumi2nix": {
       "inputs": {
         "flake-parts": [
@@ -211,6 +244,7 @@
         "flake-parts": "flake-parts",
         "mangopkgs": "mangopkgs",
         "nixpkgs": "nixpkgs",
+        "openapi2go": "openapi2go",
         "pulumi2nix": "pulumi2nix",
         "pulumipkgs": "pulumipkgs",
         "systems": "systems",

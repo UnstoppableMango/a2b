@@ -25,6 +25,7 @@ These builders wrap that tooling as Nix derivations instead, so the generated ou
 | `gossamer`       | Build and check Gossamer projects                                                                       |
 | `kube-vip`       | Generate a [kube-vip](https://kube-vip.io) manifest Pod                                                 |
 | `likec4`         | Build, validate, export, and generate code from [LikeC4](https://likec4.dev) architecture models        |
+| `openapi2go`     | Generate Go types from an OpenAPI spec                                                                  |
 | `pulumi`         | Build [Pulumi](https://www.pulumi.com) providers, schemas, and language SDKs                            |
 | `pulumiPackages` | Prebuilt Pulumi provider plugins, language runtimes, and components                                     |
 | `terraform`      | Generate Terraform provider code and specs using `terraform-plugin-codegen`                             |
@@ -247,6 +248,25 @@ in
 | `codegen`    | Directory of generated files; `format` is `mermaid`, `dot`, `d2`, `plantuml`, `react`, `webcomponent`, `model` |
 
 Every builder takes `flags` for CLI options it doesn't name.
+
+## Go types from OpenAPI with openapi2go
+
+`lib.openapi2go.generate` runs [openapi2go](https://github.com/UnstoppableMango/openapi2go), taken from its own flake, over one spec.
+`$out` is a directory holding a single Go file, `openapi2go.zz_generated.go` unless `outfile` says otherwise.
+
+```nix
+{ a2b, pkgs, ... }:
+{
+  packages.api-types = a2b.legacyPackages.${pkgs.system}.lib.openapi2go.generate {
+    name = "api-types";
+    src = ./openapi.yaml;
+    packageName = "api";
+  };
+}
+```
+
+The package clause comes from the spec's `info.title` when that is a valid Go package name, and `packageName` applies only when it isn't.
+`config` takes an openapi2go config file for per-type and per-field Go type overrides, and `flags` passes anything else to the CLI.
 
 ## Development
 

@@ -20,6 +20,16 @@
       inputs.treefmt-nix.follows = "treefmt-nix";
     };
 
+    # openapi2go's own flake packages it; a2b only hosts the builder.
+    openapi2go = {
+      url = "github:UnstoppableMango/openapi2go";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.treefmt-nix.follows = "treefmt-nix";
+      inputs.gomod2nix.follows = "mangopkgs/gomod2nix";
+    };
+
     pulumi2nix = {
       url = "github:UnstoppableMango/pulumi2nix";
       inputs.nixpkgs.follows = "nixpkgs";
