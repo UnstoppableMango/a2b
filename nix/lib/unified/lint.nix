@@ -11,9 +11,8 @@
 {
   lib,
   stdenvNoCC,
-  # The CLI and plugins used when the caller passes none.
-  unifiedCli,
-  defaultPlugins,
+  remark-cli,
+  remark-preset-lint-recommended,
   rc,
 }:
 lib.extendMkDerivation {
@@ -29,8 +28,8 @@ lib.extendMkDerivation {
   extendDrvArgs =
     finalAttrs:
     {
-      cli ? unifiedCli,
-      plugins ? defaultPlugins,
+      cli ? remark-cli,
+      plugins ? [ remark-preset-lint-recommended ],
       settings ? { },
       extensions ? [ ],
       # Extra engine flags, e.g. [ "--ignore-pattern" "vendor/**" ].

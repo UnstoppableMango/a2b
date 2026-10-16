@@ -43,8 +43,6 @@
         unified-run = pkgs.callPackage ./unified/checks { inherit a2b unifiedPackages; };
         unified-lint = pkgs.callPackage ./unified/checks/lint.nix { inherit a2b unifiedPackages; };
         unified-rehype = pkgs.callPackage ./unified/checks/rehype.nix { inherit a2b; };
-        unified-retext = pkgs.callPackage ./unified/checks/retext.nix { inherit a2b; };
-        unified-retext-lint = pkgs.callPackage ./unified/checks/retext-lint.nix { inherit a2b; };
 
         # Runs on every system under --all-systems, catching a renamed pulumi2nix
         # builder that the native-only build below would miss.

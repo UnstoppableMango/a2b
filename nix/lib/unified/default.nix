@@ -18,25 +18,8 @@ in
     unifiedCli = unifiedPackages.rehype-cli;
   };
 
-  # run with retext-cli, for prose.
-  retext = callPackage ./run.nix {
-    inherit rc;
-    unifiedCli = unifiedPackages.retext-cli;
-  };
-
   lint = callPackage ./lint.nix {
     inherit rc;
-    unifiedCli = unifiedPackages.remark-cli;
-    defaultPlugins = [ unifiedPackages.remark-preset-lint-recommended ];
-  };
-
-  # lint with retext-cli, for prose.
-  retextLint = callPackage ./lint.nix {
-    inherit rc;
-    unifiedCli = unifiedPackages.retext-cli;
-    defaultPlugins = with unifiedPackages; [
-      retext-english
-      retext-repeated-words
-    ];
+    inherit (unifiedPackages) remark-cli remark-preset-lint-recommended;
   };
 }
