@@ -80,11 +80,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792157722,
-        "narHash": "sha256-40Tv/R4VQGKG1cMYb8p+Q5NE+ysgE6MFyY4SWTdP7XE=",
+        "lastModified": 1792184694,
+        "narHash": "sha256-I0BbvUUbf1+7+vppCMV14cSWAgqgSC3XLBc8N8pKynM=",
         "owner": "unmango",
         "repo": "pkgs",
-        "rev": "9510cfb3b004e34901273839aad30e8369de7be0",
+        "rev": "45dec65ffb5fb5c26be7bd80ac71b1b0bb3e1fd9",
         "type": "github"
       },
       "original": {

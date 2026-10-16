@@ -2,16 +2,33 @@
 # nothing is resolved by package name.
 #
 #   plugins = [ remark-gfm [ remark-toc { heading = "Contents"; } ] "/abs/plugin.js" ];
-{
-  lib,
-  formats,
-  toPlugin,
-}:
+#
+# A derivation resolves to its entry file, `passthru.unifiedPlugin`, which
+# every plugin in unmango/pkgs' unifiedPackages sets. ESM refuses directory
+# imports, so the file has to be named.
+{ lib, formats }:
 {
   name ? "unified",
   plugins ? [ ],
   settings ? { },
 }:
+let
+  entry =
+    plugin:
+    if lib.isDerivation plugin then
+      plugin.unifiedPlugin
+        or (throw "${plugin.name} has no passthru.unifiedPlugin; pass the path of its entry file instead")
+    # Interpolated, so a local file is copied to the store and reaches the
+    # sandbox; toString would leave it outside.
+    else if lib.isPath plugin then
+      "${plugin}"
+    else
+      toString plugin;
+
+  toRc =
+    plugin:
+    if lib.isList plugin then [ (entry (lib.head plugin)) ] ++ lib.tail plugin else entry plugin;
+in
 (formats.json { }).generate "${name}-rc.json" (
-  { plugins = map toPlugin plugins; } // lib.optionalAttrs (settings != { }) { inherit settings; }
+  { plugins = map toRc plugins; } // lib.optionalAttrs (settings != { }) { inherit settings; }
 )

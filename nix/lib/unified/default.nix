@@ -2,8 +2,7 @@
 # themselves come from unmango/pkgs' unifiedPackages.
 { callPackage, unifiedPackages }:
 let
-  toPlugin = callPackage ./plugin.nix { };
-  rc = callPackage ./rc.nix { inherit toPlugin; };
+  rc = callPackage ./rc.nix { };
 in
 {
   inherit rc;
@@ -39,10 +38,5 @@ in
       retext-english
       retext-repeated-words
     ];
-  };
-
-  mdx = callPackage ./mdx.nix {
-    inherit toPlugin;
-    inherit (unifiedPackages) mdx-cli;
   };
 }
