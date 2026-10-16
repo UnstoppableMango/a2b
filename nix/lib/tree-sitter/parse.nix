@@ -1,6 +1,6 @@
 {
   lib,
-  runCommand,
+  runCommandCC,
   tree-sitter,
 }:
 {
@@ -64,7 +64,7 @@ let
   pathsFileArg = lib.optionalString (pathsFile != null) "--paths ${lib.escapeShellArg pathsFile}";
   editsArgs = lib.concatMapStringsSep " " (e: "--edits ${lib.escapeShellArg e}") edits;
 in
-runCommand "tree-sitter-parse" env ''
+runCommandCC "tree-sitter-parse" env ''
   runHook preRun
 
   # tree-sitter reads ~/.config/tree-sitter/config.json at startup

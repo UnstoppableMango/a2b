@@ -6,12 +6,14 @@
     {
       config,
       inputs',
+      lib,
       pkgs,
       ...
     }:
     let
       a2b = config.legacyPackages.lib;
       inherit (inputs'.mangopkgs.legacyPackages) unifiedPackages;
+      inherit (inputs'.mangopkgs.packages) gossamer;
     in
     {
       legacyPackages.lib = pkgs.callPackage ./. {
@@ -21,6 +23,11 @@
           terraform-plugin-codegen-framework
           terraform-plugin-codegen-openapi
           ;
+
+        # mangopkgs only packages kube-vip for Linux.
+        kube-vip =
+          inputs'.mangopkgs.packages.kube-vip
+            or (throw "a2b: kube-vip is not packaged for ${pkgs.stdenv.hostPlatform.system}");
 
         pulumi2nixLib = inputs.pulumi2nix.lib;
 
@@ -38,11 +45,23 @@
 
         buf-workspace = pkgs.callPackage ./buf/checks/workspace { inherit a2b; };
 
+        flux = pkgs.callPackage ./flux/checks { inherit a2b; };
+
+        gossamer = pkgs.callPackage ./gossamer/checks { inherit a2b gossamer; };
+
         likec4-model = pkgs.callPackage ./likec4/checks/model { inherit a2b; };
+
+        terraform = pkgs.callPackage ./terraform/checks { inherit a2b; };
+
+        tree-sitter = pkgs.callPackage ./tree-sitter/checks { inherit a2b; };
+
+        typescript = pkgs.callPackage ./typescript/checks { inherit a2b; };
 
         unified-run = pkgs.callPackage ./unified/checks { inherit a2b unifiedPackages; };
         unified-lint = pkgs.callPackage ./unified/checks/lint.nix { inherit a2b unifiedPackages; };
         unified-rehype = pkgs.callPackage ./unified/checks/rehype.nix { inherit a2b; };
+
+        upjet = pkgs.callPackage ./upjet/checks { inherit a2b; };
 
         # Runs on every system under --all-systems, catching a renamed pulumi2nix
         # builder that the native-only build below would miss.
@@ -50,6 +69,9 @@
 
         # Cheapest package that still runs mkTerraformBridgeProvider end to end.
         pulumi-random = a2b.pulumiPackages.random;
+      }
+      // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+        kube-vip = pkgs.callPackage ./kube-vip/checks { inherit a2b; };
       };
     };
 }

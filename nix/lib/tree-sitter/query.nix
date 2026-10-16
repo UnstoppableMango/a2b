@@ -1,6 +1,6 @@
 {
   lib,
-  runCommand,
+  runCommandCC,
   tree-sitter,
 }:
 {
@@ -47,7 +47,7 @@ let
 
   pathsFileArg = lib.optionalString (pathsFile != null) "--paths ${lib.escapeShellArg pathsFile}";
 in
-runCommand "tree-sitter-query" env ''
+runCommandCC "tree-sitter-query" env ''
   runHook preRun
 
   export HOME="$(mktemp -d)"

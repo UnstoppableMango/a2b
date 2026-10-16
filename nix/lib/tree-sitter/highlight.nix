@@ -1,6 +1,6 @@
 {
   lib,
-  runCommand,
+  runCommandCC,
   tree-sitter,
 }:
 {
@@ -42,7 +42,7 @@ let
     p: "--query-paths ${lib.escapeShellArg p}"
   ) queryPaths;
 in
-runCommand "tree-sitter-highlight" env ''
+runCommandCC "tree-sitter-highlight" env ''
   runHook preRun
 
   export HOME="$(mktemp -d)"

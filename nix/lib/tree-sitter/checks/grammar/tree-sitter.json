@@ -1,0 +1,14 @@
+{
+  "grammars": [
+    {
+      "name": "pairs",
+      "scope": "source.pairs",
+      "file-types": ["pairs"],
+      "path": ".",
+      "highlights": "queries/highlights.scm"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0"
+  }
+}

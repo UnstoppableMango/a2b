@@ -1,6 +1,6 @@
 {
   lib,
-  runCommand,
+  runCommandCC,
   tree-sitter,
 }:
 {
@@ -19,7 +19,7 @@ let
 
   grammarPathArg = lib.optionalString (grammarPath != null) (lib.escapeShellArg grammarPath);
 in
-runCommand "tree-sitter-build" env ''
+runCommandCC "tree-sitter-build" env ''
   runHook preRun
 
   export HOME="$(mktemp -d)"
