@@ -3,6 +3,7 @@
   gossamer,
   kube-vip,
   likec4,
+  openapi2go,
   pulumi2nixLib,
   pulumiPackages,
   terraform-plugin-codegen-framework,
@@ -23,6 +24,7 @@ in
   gossamer = pkgs.callPackage ./gossamer { inherit gossamer; };
   kube-vip = pkgs.callPackage ./kube-vip { inherit kube-vip; };
   likec4 = pkgs.callPackage ./likec4 { inherit likec4; };
+  openapi2go = pkgs.callPackage ./openapi2go { inherit openapi2go; };
 
   # pulumi2nix's flake.lib is a `{ pkgs }:` function rather than an attrset.
   pulumi = pulumi2nixLib { inherit pkgs; };
