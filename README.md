@@ -285,12 +285,6 @@ make fmt      # format the repo (nixfmt, prettier)
 make check    # validate the flake (nix flake check)
 ```
 
-If you change `nix/lib/typescript/npm/package.json`, regenerate its lockfile with:
-
-```bash
-make nix/lib/typescript/npm/package-lock.json
-```
-
 ## License
 
 [MIT](LICENSE)

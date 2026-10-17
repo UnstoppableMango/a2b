@@ -20,6 +20,7 @@
         inherit (inputs'.mangopkgs.packages)
           gossamer
           likec4
+          openapi-typescript
           terraform-plugin-codegen-framework
           terraform-plugin-codegen-openapi
           ;

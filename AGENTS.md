@@ -12,9 +12,6 @@ make fmt                            # nix fmt (nixfmt)
 nix build                           # builds default (currently undefined — lib only)
 nix flake check                     # validate flake
 make check                          # alias for nix flake check
-
-# Update npm lockfile after package.json changes
-make nix/lib/typescript/npm/package-lock.json
 ```
 
 ## Architecture
@@ -34,7 +31,7 @@ make nix/lib/typescript/npm/package-lock.json
   - `pulumiPackages` — re-export of [unmango/pulumipkgs](https://github.com/unmango/pulumipkgs)' provider plugins, language runtimes, and components, not defined here
   - `terraform` — `genProviderSpec`, `genProvider`, `scaffold` using `terraform-plugin-codegen-*` tools
   - `tree-sitter` — `build`, `generate`, `highlight`, `init`, `parse`, `playground`, `query` derivations
-  - `typescript` — `openapi-typescript` for generating TypeScript types from OpenAPI specs
+  - `typescript` — `openapi-typescript` for generating TypeScript types from OpenAPI specs, using mangopkgs' `openapi-typescript`
   - `unified` — `run` (runs a unified CLI over a source tree, files rewritten in place), `rehype` (`run` with rehype-cli, for HTML), `lint` (fails the build on any lint warning, `$out` is the report; remark-preset-lint-recommended by default) and `rc` (writes an rc naming plugins by the store path of their entry file, `passthru.unifiedPlugin`)
   - `unifiedPackages` — re-export of [unmango/pkgs](https://github.com/unmango/pkgs)' unified.js package set (remark-cli, plugins), not defined here
   - `upjet` — `genProviderTemplate`, `genProvider` for Upjet-based Crossplane providers

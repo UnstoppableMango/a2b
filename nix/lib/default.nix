@@ -3,6 +3,7 @@
   gossamer,
   kube-vip,
   likec4,
+  openapi-typescript,
   openapi2go,
   pulumi2nixLib,
   pulumiPackages,
@@ -36,7 +37,7 @@ in
   };
 
   tree-sitter = pkgs.callPackage ./tree-sitter { };
-  typescript = pkgs.callPackage ./typescript { };
+  typescript = pkgs.callPackage ./typescript { inherit openapi-typescript; };
 
   unified = pkgs.callPackage ./unified { inherit unifiedPackages; };
 
