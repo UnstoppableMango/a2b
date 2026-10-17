@@ -26,6 +26,7 @@ make check                          # alias for nix flake check
   - `gossamer` — `build`, `check`, `runCommand` derivations
   - `kube-vip` — `manifestPod` for kube-vip manifest generation
   - `likec4` — `build`, `codegen`, `exportJson`, `validate` derivations for [LikeC4](https://likec4.dev) architecture models, using mangopkgs' `likec4`
+  - `openapi2go` — `generate`, Go types from an OpenAPI spec using the `openapi2go` flake input (the repo packages itself, not mangopkgs); captures stdout because the CLI's `--output` always names the file `petstore.go`
   - `pulumi` — re-export of [UnstoppableMango/pulumi2nix](https://github.com/UnstoppableMango/pulumi2nix)'s builders (`mkPulumiPackage`, `mkTerraformBridgeProvider`, `mkComponentPackage`, `mkSdkSource`, ...), not defined here
   - `pulumiPackages` — re-export of [unmango/pulumipkgs](https://github.com/unmango/pulumipkgs)' provider plugins, language runtimes, and components, not defined here
   - `terraform` — `genProviderSpec`, `genProvider`, `scaffold` using `terraform-plugin-codegen-*` tools

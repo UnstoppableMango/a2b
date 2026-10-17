@@ -30,6 +30,9 @@
           inputs'.mangopkgs.packages.kube-vip
             or (throw "a2b: kube-vip is not packaged for ${pkgs.stdenv.hostPlatform.system}");
 
+        # openapi2go packages itself rather than going through mangopkgs.
+        inherit (inputs'.openapi2go.packages) openapi2go;
+
         pulumi2nixLib = inputs.pulumi2nix.lib;
 
         inherit unifiedPackages;
@@ -51,6 +54,8 @@
         gossamer = pkgs.callPackage ./gossamer/checks { inherit a2b gossamer; };
 
         likec4-model = pkgs.callPackage ./likec4/checks/model { inherit a2b; };
+
+        openapi2go = pkgs.callPackage ./openapi2go/checks { inherit a2b; };
 
         terraform = pkgs.callPackage ./terraform/checks { inherit a2b; };
 
