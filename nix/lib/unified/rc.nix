@@ -18,6 +18,10 @@ let
     if lib.isDerivation plugin then
       plugin.unifiedPlugin
         or (throw "${plugin.name} has no passthru.unifiedPlugin; pass the path of its entry file instead")
+    # Interpolated, so a local file is copied to the store and reaches the
+    # sandbox; toString would leave it outside.
+    else if lib.isPath plugin then
+      "${plugin}"
     else
       toString plugin;
 
