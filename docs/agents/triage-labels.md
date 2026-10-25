@@ -2,6 +2,8 @@
 
 The skills speak in terms of five canonical triage roles. This file maps those roles to the actual label strings used in this repo's issue tracker.
 
+Only `wontfix` exists in the repo so far. `gh issue edit --add-label` fails on a missing label, so create one with `gh label create <name>` before its first use.
+
 | Label in mattpocock/skills | Label in our tracker | Meaning                                  |
 | -------------------------- | -------------------- | ---------------------------------------- |
 | `needs-triage`             | `needs-triage`       | Maintainer needs to evaluate this issue  |
