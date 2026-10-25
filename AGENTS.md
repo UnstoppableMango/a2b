@@ -41,3 +41,17 @@ make check                          # alias for nix flake check
 ### Gotchas
 
 - `nixConfig.allow-import-from-derivation = false` in `flake.nix`. Building `legacyPackages.lib.upjet` needs IFD regardless (transitively depends on mangopkgs' gomod2nix-based `buildGoApplication`), so pass `--option allow-import-from-derivation true` when building that output.
+
+## Agent skills
+
+### Issue tracker
+
+Issues are tracked in GitHub Issues on UnstoppableMango/a2b. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The five default triage labels (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: one `CONTEXT.md` and `docs/adr/` at the repo root. See `docs/agents/domain.md`.
