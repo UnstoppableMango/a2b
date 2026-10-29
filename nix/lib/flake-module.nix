@@ -25,6 +25,8 @@
           terraform-plugin-codegen-openapi
           ;
 
+        likec4Env = inputs'.mangopkgs.packages.likec4.env;
+
         # mangopkgs only packages kube-vip for Linux.
         kube-vip =
           inputs'.mangopkgs.packages.kube-vip
