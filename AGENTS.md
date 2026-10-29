@@ -25,7 +25,8 @@ make check                          # alias for nix flake check
   - `flux` — `createKustomization`, `createSourceGit`, `gotkComponents`, `install` for Flux CD
   - `gossamer` — `build`, `check`, `runCommand` derivations
   - `kube-vip` — `manifestPod` for kube-vip manifest generation
-  - `likec4` — `build`, `codegen`, `exportJson`, `validate` derivations for [LikeC4](https://likec4.dev) architecture models, using mangopkgs' `likec4`
+  - `likec4` — `build`, `codegen`, `exportJson`, `validate` derivations for [LikeC4](https://likec4.dev) architecture models, using mangopkgs' `likec4`. `likec4 build` exits 0 on model errors, so `validate` is what fails a broken model
+  - `likec4Env` — re-export of mangopkgs' `likec4.env` (CLI, `likec4-lsp`, config schema, agent skill) for devShells and editors, not defined here
   - `openapi2go` — `generate`, Go types from an OpenAPI spec using the `openapi2go` flake input (the repo packages itself, not mangopkgs); captures stdout because the CLI's `--output` always names the file `petstore.go`
   - `pulumi` — re-export of [UnstoppableMango/pulumi2nix](https://github.com/UnstoppableMango/pulumi2nix)'s builders (`mkPulumiPackage`, `mkTerraformBridgeProvider`, `mkComponentPackage`, `mkSdkSource`, ...), not defined here
   - `pulumiPackages` — re-export of [unmango/pulumipkgs](https://github.com/unmango/pulumipkgs)' provider plugins, language runtimes, and components, not defined here
