@@ -25,6 +25,7 @@ These builders wrap that tooling as Nix derivations instead, so the generated ou
 | `gossamer`       | Build and check Gossamer projects                                                                       |
 | `kube-vip`       | Generate a [kube-vip](https://kube-vip.io) manifest Pod                                                 |
 | `likec4`         | Build, validate, export, and generate code from [LikeC4](https://likec4.dev) architecture models        |
+| `likec4Env`      | LikeC4 CLI, language server, and config schema for devShells and editors                                |
 | `openapi2go`     | Generate Go types from an OpenAPI spec                                                                  |
 | `pulumi`         | Build [Pulumi](https://www.pulumi.com) providers, schemas, and language SDKs                            |
 | `pulumiPackages` | Prebuilt Pulumi provider plugins, language runtimes, and components                                     |
@@ -248,6 +249,17 @@ in
 | `codegen`    | Directory of generated files; `format` is `mermaid`, `dot`, `d2`, `plantuml`, `react`, `webcomponent`, `model` |
 
 Every builder takes `flags` for CLI options it doesn't name.
+`build` doesn't fail on model errors (`likec4 build` logs them and exits 0), which is why `validate` belongs in `checks`.
+`useDot = true` lays views out with Graphviz, which the builder supplies, instead of the bundled WASM build.
+
+`lib.likec4Env` is the same likec4 for editing: `likec4`, `likec4-lsp` for editors, the `likec4.config.json` schema at `share/likec4/schema.json`, and the `likec4-dsl` agent skill under `share/likec4/skills`.
+Add it to a devShell or to `home.packages`; it needs no `package.json`.
+
+```nix
+devShells.default = pkgs.mkShellNoCC {
+  packages = [ a2b.legacyPackages.${pkgs.system}.lib.likec4Env ];
+};
+```
 
 ## Go types from OpenAPI with openapi2go
 

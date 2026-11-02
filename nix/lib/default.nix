@@ -3,6 +3,7 @@
   gossamer,
   kube-vip,
   likec4,
+  likec4Env,
   openapi-typescript,
   openapi2go,
   pulumi2nixLib,
@@ -25,6 +26,11 @@ in
   gossamer = pkgs.callPackage ./gossamer { inherit gossamer; };
   kube-vip = pkgs.callPackage ./kube-vip { inherit kube-vip; };
   likec4 = pkgs.callPackage ./likec4 { inherit likec4; };
+
+  # Re-exported from unmango/pkgs: the CLI, likec4-lsp, the config schema and
+  # the agent skill, from the same likec4 the builders run.
+  inherit likec4Env;
+
   openapi2go = pkgs.callPackage ./openapi2go { inherit openapi2go; };
 
   # pulumi2nix's flake.lib is a `{ pkgs }:` function rather than an attrset.
