@@ -165,11 +165,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792474019,
-        "narHash": "sha256-yzRtCHyoQd0KYh84ydXLuAHcgAHD1xcBu2gcHJc1qC4=",
+        "lastModified": 1793574573,
+        "narHash": "sha256-8i9ZYX+aCBqtxGN4W9F9MM8dtPAepsQoUXTXFW5J6SE=",
         "owner": "UnstoppableMango",
         "repo": "openapi2go",
-        "rev": "630a18615eb345aa56b5cae280e1bd462df3834c",
+        "rev": "66e95ecbba8feffb7d068c41d123f27f4b5c6440",
         "type": "github"
       },
       "original": {
